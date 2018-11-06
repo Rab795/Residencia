@@ -9,3 +9,11 @@
 #pagination_controls{
 	text-align: center;
 }
+
+#imgStudent{
+	width: 90px;
+}
+
+#panelPerfil{
+	min-height: 550px;
+}

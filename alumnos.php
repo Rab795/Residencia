@@ -10,6 +10,7 @@
 	<!-- VENDOR CSS -->
 	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/vendor/fontawesome-free-5.5.0-web/css/all.css">
 	<link rel="stylesheet" href="assets/vendor/linearicons/style.css">
 	<link rel="stylesheet" href="assets/vendor/chartist/css/chartist-custom.css">
 	<link rel="stylesheet" href="assets/vendor/toastr/toastr.min.css">
@@ -61,8 +62,16 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Inicio</span></a></li>
-						<li><a href="alumnos.php" class=""><i class="lnr lnr-graduation-hat"></i> <span>Alumnos</span></a></li>
+						<li><a href="index.html" class=""><i class="lnr lnr-home"></i> <span>Inicio</span></a></li>
+						<li>
+							<a href="#subPages3" data-toggle="collapse" class="active"><i class="lnr lnr-graduation-hat"></i> <span>Alumnos</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages3" class="collapse in">
+								<ul class="nav">
+									<li><a href="alumnos.php" class="active">Buscar</a></li>
+									<li><a href="#" class="">Agregar</a></li>
+								</ul>
+							</div>
+						</li>
 						<li><a href="#" class=""><i class="lnr lnr-apartment"></i> <span>Empresas</span></a></li>
 						<li><a href="#" class=""><i class="lnr lnr-book"></i> <span>Proyectos</span></a></li>
 						<li>
@@ -76,6 +85,16 @@
 						</li>
 						<li><a href="#" class=""><i class="lnr lnr-chart-bars"></i> <span>Reportes</span></a></li>
 						<li><a href="#" class=""><i class="lnr lnr-dice"></i> <span>Herramientas</span></a></li>
+						<li>
+							<a href="#subPages2" data-toggle="collapse" class="collapsed"><i class="far fa-building"></i> <span>Institucion</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages2" class="collapse ">
+								<ul class="nav">
+									<li><a href="#" class="">Informacion</a></li>
+									<li><a href="#" class="">Periodos</a></li>
+									<li><a href="#" class="">Carreras</a></li>
+								</ul>
+							</div>
+						</li>
 						<li><a href="typography.html" class=""><i class="lnr lnr-cog"></i> <span>Configuracion</span></a></li>
 					</ul>
 				</nav>
@@ -112,7 +131,7 @@
 										while($row = mysqli_fetch_array($_pagi_result)){
 										?>
 											<tr>
-												<td><?php echo $row['alu_noControl']; ?></td>
+												<td><a href="infoAlumno.html" onclick="cargaAlumno(<?php echo $row['alu_id']; ?>)"><?php echo $row['alu_noControl']; ?></a></td>
 												<td><?php echo $row['alu_nombre']; ?></td>
 												<td><?php echo $row['alu_aPaterno']; ?></td>
 												<td><?php echo $row['alu_aMaterno']; ?></td>
@@ -120,7 +139,7 @@
 												<td><?php echo $row['car_nombre']; ?></td>
 												<td><?php echo $row['alu_Status']; ?></td>
 												<td><button class="btn btn-info"><i class="fa fa-edit"></i></button></td>
-												<td><button class="btn btn-danger"><i class="fa fa-trash-o"></i></button></td>
+												<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
 											</tr>
 										<?php
 										}		
@@ -140,7 +159,7 @@
 		<div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">
-				<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+				<p class="copyright">&copy; 2018 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
 			</div>
 		</footer>
 	</div>
