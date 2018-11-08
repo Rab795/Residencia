@@ -68,7 +68,7 @@
 							<div id="subPages3" class="collapse in">
 								<ul class="nav">
 									<li><a href="alumnos.php" class="active">Buscar</a></li>
-									<li><a href="#" class="">Agregar</a></li>
+									<li><a href="nuevoAlumno.html" class="">Agregar</a></li>
 								</ul>
 							</div>
 						</li>
@@ -107,9 +107,45 @@
 			<div class="main-content">
 				<div class="container-fluid">
 					<!-- OVERVIEW -->
+					<h3 class="page-title">Alumnos</h3>
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h3 class="panel-title">Alumnos</h3>
+							<div class="row">
+								<div class="col-md-3">					
+									<div class="input-group">
+										<span class="input-group-addon">No. Control</span>
+										<input class="form-control" type="text">
+									</div>
+								</div>
+								<div class="col-md-3">					
+									<div class="input-group">
+										<span class="input-group-addon">Nombre</span>
+										<input class="form-control" type="text">
+									</div>
+								</div>
+								<div class="col-md-3">					
+									<div class="input-group">
+										<span class="input-group-addon">Carrera</span>
+										<select class="form-control">
+											<option value="cheese">Todas</option>
+											<option value="cheese">Ing. en TIC</option>
+											<option value="tomatoes">Ing. en Sistemas</option>
+											<option value="mozarella">Ing. Informatica</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-3">					
+									<div class="input-group">
+										<span class="input-group-addon">Status</span>
+										<select class="form-control">
+											<option value="cheese">Todos</option>
+											<option value="cheese">Aspirante</option>
+											<option value="tomatoes">Activo</option>
+											<option value="mozarella">Inactivo</option>
+										</select>
+									</div>
+								</div>
+							</div>
 						</div>
 						<div class="panel-body">
 							<table class="table table-hover" id="tblAlumnos">
