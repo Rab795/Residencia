@@ -1,4 +1,3 @@
-<?php include('assets/php/paginadoAlumnos.php'); ?>
 <!doctype html>
 <html lang="en">
 
@@ -37,12 +36,6 @@
 				<div class="navbar-btn">
 					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
 				</div>
-				<!-- <form class="navbar-form navbar-left">
-					<div class="input-group">
-						<input type="text" value="" class="form-control" placeholder="Search dashboard...">
-						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
-					</div>
-				</form> -->
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -114,75 +107,37 @@
 								<div class="col-md-3">					
 									<div class="input-group">
 										<span class="input-group-addon">No. Control</span>
-										<input class="form-control" type="text">
+										<input class="form-control" type="text" id="inpNoControl" onkeyup="cargaAlumnos(1)">
 									</div>
 								</div>
 								<div class="col-md-3">					
 									<div class="input-group">
 										<span class="input-group-addon">Nombre</span>
-										<input class="form-control" type="text">
+										<input class="form-control" type="text" id="inpNombre" onkeyup="cargaAlumnos(1)">
 									</div>
 								</div>
 								<div class="col-md-3">					
 									<div class="input-group">
 										<span class="input-group-addon">Carrera</span>
-										<select class="form-control">
-											<option value="cheese">Todas</option>
-											<option value="cheese">Ing. en TIC</option>
-											<option value="tomatoes">Ing. en Sistemas</option>
-											<option value="mozarella">Ing. Informatica</option>
+										<select class="form-control" id="slcCarreras" onchange="cargaAlumnos(1)">
 										</select>
 									</div>
 								</div>
 								<div class="col-md-3">					
 									<div class="input-group">
 										<span class="input-group-addon">Status</span>
-										<select class="form-control">
-											<option value="cheese">Todos</option>
-											<option value="cheese">Aspirante</option>
-											<option value="tomatoes">Activo</option>
-											<option value="mozarella">Inactivo</option>
+										<select class="form-control" id="slcStatus" onchange="cargaAlumnos(1)">
+											<option value="">Todos</option>
+											<option value="Aspirante">Aspirante</option>
+											<option value="Activo">Activo</option>
+											<option value="Inactivo">Inactivo</option>
 										</select>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="panel-body">
-							<table class="table table-hover" id="tblAlumnos">
-								<thead>
-									<tr>
-										<th>No. Control</th>
-										<th>Nombre</th>
-										<th>A. Paterno</th>
-										<th>A. Materno</th>
-										<th>Telefono</th>
-										<th>Carrera</th>
-										<th>Status</th>
-										<th>Editar</th>
-										<th>Eliminar</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-										while($row = mysqli_fetch_array($_pagi_result)){
-										?>
-											<tr>
-												<td><a href="infoAlumno.html" onclick="cargaAlumno(<?php echo $row['alu_id']; ?>)"><?php echo $row['alu_noControl']; ?></a></td>
-												<td><?php echo $row['alu_nombre']; ?></td>
-												<td><?php echo $row['alu_aPaterno']; ?></td>
-												<td><?php echo $row['alu_aMaterno']; ?></td>
-												<td><?php echo $row['alu_tel']; ?></td>
-												<td><?php echo $row['car_nombre']; ?></td>
-												<td><?php echo $row['alu_Status']; ?></td>
-												<td><button class="btn btn-info"><i class="fa fa-edit"></i></button></td>
-												<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
-											</tr>
-										<?php
-										}		
-									?>
-								</tbody>
-							</table>
-							<div id="pagination_controls"><?php echo"<p>".$_pagi_navegacion."</p>"; ?></div>
+							<div class="panel-body" id="respuestaAjax">
+								<!--respuestaAjax-->
 							</div>
 						</div>
 					</div>
@@ -210,7 +165,11 @@
 	<script src="assets/vendor/toastr/toastr.min.js"></script>
 	<script src="assets/scripts/funciones.js"></script>
 	<script type="text/javascript">
-		validarSesion();
+		if(validarSesion()){
+			cargalistaCarreras("filtro");
+			cargaAlumnos(1);	
+		}
+		//cargalistaCarreras();
 	</script>>
 </body>
 

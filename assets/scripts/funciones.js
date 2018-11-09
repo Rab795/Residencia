@@ -3,7 +3,8 @@ var urlServidor = 'http://localhost/MED/assets/';
 var urlLogin = 'php/login.php';
 var ulrvalidarsesion = 'php/validarSesion.php';
 var urlcerrarsesion = 'php/cerrarSesion.php';
-var urlcargaAlumnos = 'php/cargaAlumnos.php';
+var urlcargaAlumnos = 'php/paginadoAlumnos.php';
+var urlcargaCarreras = 'php/listaCarreras.php';
 
 function iniciarSesion()
 { 
@@ -40,11 +41,10 @@ function iniciarSesion()
 
 function validarSesion()
 {
+	var session = false;
 	var url = urlServidor+ulrvalidarsesion;
 	
-	x.open('GET', url, true);
-	x.send();
-	
+	x.open('GET', url, false);
 	x.onreadystatechange = function() 
 	{
         if(x.status == 200 && x.readyState == 4)
@@ -58,13 +58,17 @@ function validarSesion()
 				elemento1.innerHTML ="";
 				var txt1 = document.createTextNode(datosJSON.USUARIO);
 				elemento1.appendChild(txt1);
+				session = true;
 			}
 			if(datosJSON.STATUS > 0)
 			{
-				location.href =  'http://localhost/MED/page-login.html'; 
+				location.href =  'http://localhost/MED/page-login.html';
+				session = false; 
 			}
 		}
 	}
+	x.send();
+	return session;
 }
 
 function cerrarsesion()
@@ -72,8 +76,6 @@ function cerrarsesion()
 	var url = urlServidor+urlcerrarsesion;
 	
 	x.open('GET', url, true);
-	x.send();
-	
 	x.onreadystatechange = function() 
 	{
         if(x.status == 200 && x.readyState == 4)
@@ -81,4 +83,42 @@ function cerrarsesion()
 			location.href = 'http://localhost/MED/page-login.html';
 		}
 	}
+	x.send();
+}
+
+function cargaAlumnos(page){
+	var noControl=document.getElementById("inpNoControl").value;
+	var nombre = document.getElementById("inpNombre").value;
+	var carrera = document.getElementById("slcCarreras").value;
+	var status = document.getElementById("slcStatus").value;
+	var per_page=10;
+	var parametros = "funcion=cargaAlumnos&page="+page+"&noControl="+noControl+"&per_page="+per_page+"&nombre="+nombre+"&carrera="+carrera+"&status="+status;
+	
+	var url = urlServidor+urlcargaAlumnos;	
+	x.open('POST',url,true);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("respuestaAjax").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function cargalistaCarreras(action){
+	document.getElementById("slcCarreras").innerHTML = "";
+	var parametros = "action="+action;
+	var url = urlServidor+urlcargaCarreras;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("slcCarreras").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
 }
