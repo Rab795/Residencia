@@ -122,3 +122,64 @@ function cargalistaCarreras(action){
 	}
 	x.send(parametros);
 }
+
+function validarAlumno(){
+	var correcto =  true;
+	if(document.getElementById("inpNombre").value == "") { document.getElementById("divNombre").classList.add("has-error"); correcto = false; }
+	if(document.getElementById("inpApaterno").value == "") { document.getElementById("divApaterno").classList.add("has-error"); correcto = false; }
+	if(document.getElementById("inpAmaterno").value == "") { document.getElementById("divAmaterno").classList.add("has-error"); correcto = false; }
+	if(document.getElementById("inpNoControl").value == "") { document.getElementById("divNoControl").classList.add("has-error"); correcto = false; }
+	if(document.getElementById("inpCorreo").value == "") { document.getElementById("divCorreo").classList.add("has-error"); correcto = false; }
+	if (correcto){ guardarAlumno(); }
+	else { toastr.error("Parametros Incompletos"); } 
+}
+
+function guardarAlumno() {
+	var nombre = document.getElementById("inpNombre").value;
+	var apaterno = document.getElementById("inpApaterno").value;
+	var amaterno = document.getElementById("inpAmaterno").value;
+	var nocontrol = document.getElementById("inpNoControl").value;
+	var correo = document.getElementById("inpCorreo").value;
+	var telefono = document.getElementById("inpTelefono").value;
+	var status = document.getElementById("slcEstatus").value;
+	var direccion = document.getElementById("inpDireccion").value;
+	var genero = document.getElementById("inpGenero").value;
+	var fechaNacimeinto = document.getElementById("inpFechaN").value;
+	var nacionalidad = document.getElementById("inpNaci").value;
+	var edad = document.getElementById("inpEdad").value;
+	var carrera = document.getElementById("slcCarreras").value;
+
+	var parametros = "";
+	parametros = conParam("nombre",nombre,parametros);
+	parametros = conParam("apaterno",apaterno,parametros);
+	parametros = conParam("amaterno",amaterno,parametros);
+	parametros = conParam("nocontrol",nocontrol,parametros);
+	parametros = conParam("correo",correo,parametros);
+	parametros = conParam("telefono",telefono,parametros);
+	parametros = conParam("status",status,parametros);
+	parametros = conParam("direccion",direccion,parametros);
+	parametros = conParam("genero",genero,parametros);
+	parametros = conParam("fechaNacimeinto",fechaNacimeinto,parametros);
+	parametros = conParam("nacionalidad",nacionalidad,parametros);
+	parametros = conParam("edad",edad,parametros);
+	parametros = conParam("carrera",carrera,parametros);
+
+	var url = urlServidor+urlcargaCarreras;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("slcCarreras").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+
+}
+
+function conParam(eti,val,param){
+	if(param != "") param += "&"+eti+"="+val;
+	else {param += eti+"="+val}
+	return param;
+}

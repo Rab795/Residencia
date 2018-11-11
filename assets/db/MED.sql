@@ -93,6 +93,12 @@ CREATE TABLE Alumnos(
 	alu_aMaterno VARCHAR(100),
     alu_Status VARCHAR (100),
 	alu_tel VARCHAR(100),
+	alu_correo VARCHAR(100),
+	alu_direccion VARCHAR(100),
+	alu_genero CHAR,
+	alu_fechaNacimeinto DATE,
+	alu_nacionalidad VARCHAR(50),
+	alu_edad INT,
 	alu_idCarrera INT,
 	alu_idAsesorInterno INT,
 	alu_idProyecto INT,
@@ -148,6 +154,7 @@ CREATE TABLE PerfilAcademico(
 	pad_servicioSocial BOOLEAN,
 	pad_creditos BOOLEAN,
     pad_promedio DOUBLE,
+	pad_semestre INT,
 	pad_idEspecialidad INT,
 	pad_idAlumno INT
 );
@@ -176,28 +183,3 @@ CREATE TABLE Materias(
 ALTER TABLE Materias ADD CONSTRAINT fk_Materias_Especialidades FOREIGN KEY(mat_idEspecialidad)
 REFERENCES Especialidades(esp_id);
 
-USE MED;
-INSERT INTO Usuarios VALUES (1,"admin","1234");
-INSERT INTO Institucion VALUES (1,"Instituto Tecnologico de Tijuana","Calzada tecnologico Tijuana B.C.");
-INSERT INTO Carreras VALUES (1,"Ing. en TIC",1);
-INSERT INTO AsesesorInterno VALUES (1,"Karla","Lopez","Gomez","Sistemas",1,1);
-INSERT INTO Periodos VALUES (1,"Ago-Dic 2018","2018-08-24","2018-12-16");
-INSERT INTO Empresa VALUES (1, "Plantronics","PL09232343423","Blvd. Bellas Artes Otay","Electronica","6642347654");
-INSERT INTO AsesorExterno VALUES (1,"Jose","Martinez","Rodriguez","Gerente",1);
-INSERT INTO Proyecto VALUES (1,"Desarollo de MRP","desc","Sistemas",1,1,1);
-INSERT INTO Alumnos VALUES (1,"13211512","Salvador","Rabago","Cruz","Activo","6643678166",1,1,1,1);
-INSERT INTO Alumnos VALUES (2,"13211513","Kimberly","Lopez","Gomez","Activo","6642343423",1,1,1,1);
-INSERT INTO Alumnos VALUES (3,"13211514","Luis","Rodriguez","Camacho","Activo","664878677",1,1,1,1);
-INSERT INTO Alumnos VALUES (4,"13211515","Jorge","Perez","Laredo","Activo","6643456786",1,1,1,1);
-INSERT INTO Alumnos VALUES (5,"13211516","Francisco","Dominguez","Cortez","Activo","6642335653",1,1,1,1);
-INSERT INTO Alumnos VALUES (6,"13211517","Salvador","Rabago","Cruz","Activo","6643678166",1,1,1,1);
-INSERT INTO Alumnos VALUES (7,"13211518","Kimberly","Lopez","Gomez","Activo","6642343423",1,1,1,1);
-INSERT INTO Alumnos VALUES (8,"13211519","Luis","Rodriguez","Camacho","Activo","664878677",1,1,1,1);
-INSERT INTO Alumnos VALUES (9,"13211520","Jorge","Perez","Laredo","Activo","6643456786",1,1,1,1);
-INSERT INTO Alumnos VALUES (10,"13211521","Francisco","Dominguez","Cortez","Activo","6642335653",1,1,1,1);
-INSERT INTO Alumnos VALUES (11,"13211522","Salvador","Rabago","Cruz","Activo","6643678166",1,1,1,1);
-INSERT INTO Alumnos VALUES (12,"13211523","Kimberly","Lopez","Gomez","Activo","6642343423",1,1,1,1);
-INSERT INTO Alumnos VALUES (13,"13211524","Luis","Rodriguez","Camacho","Activo","664878677",1,1,1,1);
-INSERT INTO Alumnos VALUES (14,"13211525","Jorge","Perez","Laredo","Activo","6643456786",1,1,1,1);
-INSERT INTO Alumnos VALUES (15,"13211526","Francisco","Dominguez","Cortez","Activo","6642335653",1,1,1,1);
-SELECT alu_id,alu_noControl,alu_nombre,alu_aPaterno,alu_aMaterno,alu_tel,car_nombre,alu_Status FROM Alumnos INNER JOIN Carreras ON alu_idCarrera = car_id;
