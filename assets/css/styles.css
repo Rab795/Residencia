@@ -15,5 +15,10 @@
 }
 
 #panelPerfil{
-	min-height: 550px;
+	min-height: 655px;
+}
+
+.checkHorizontal{
+    float: left;
+    margin-left: 20px;
 }

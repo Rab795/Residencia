@@ -46,7 +46,7 @@ SELECT car_id,car_nombre FROM Carreras;
 SELECT car_id,car_nombre FROM Carreras;
 
 INSERT INTO Alumnos (alu_noControl,alu_nombre,alu_aPaterno,alu_aMaterno,alu_Status,alu_tel,alu_correo,alu_direccion,alu_genero,alu_fechaNacimeinto,alu_nacionalidad,alu_edad,alu_idCarrera)
-VALUES ("13211526","TESTEO","Apellido1","Apellido2","Activo","6643245623","tesst7@gmail.com","233345 col morita","F","1993-04-06","Colombiana",21,1);
+VALUES ("13211526","TESTEO","Apellido1","Apellido2","Activo","6643245623","tesst7@gmail.com","233345 col morita","F",NULL,"Colombiana",21,0);
 
 
 SELECT * FROM Alumnos;

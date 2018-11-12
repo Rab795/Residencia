@@ -5,6 +5,7 @@ var ulrvalidarsesion = 'php/validarSesion.php';
 var urlcerrarsesion = 'php/cerrarSesion.php';
 var urlcargaAlumnos = 'php/paginadoAlumnos.php';
 var urlcargaCarreras = 'php/listaCarreras.php';
+var urlAgregarAlumno = 'php/agregarAlumno.php';
 
 function iniciarSesion()
 { 
@@ -146,8 +147,8 @@ function guardarAlumno() {
 	var genero = document.getElementById("inpGenero").value;
 	var fechaNacimeinto = document.getElementById("inpFechaN").value;
 	var nacionalidad = document.getElementById("inpNaci").value;
-	var edad = document.getElementById("inpEdad").value;
-	var carrera = document.getElementById("slcCarreras").value;
+	var edad = (document.getElementById("inpEdad").value != "")? document.getElementById("inpEdad").value : 0;
+	var carrera = (document.getElementById("slcCarreras").value != "")? document.getElementById("slcCarreras").value : 0;
 
 	var parametros = "";
 	parametros = conParam("nombre",nombre,parametros);
@@ -164,14 +165,24 @@ function guardarAlumno() {
 	parametros = conParam("edad",edad,parametros);
 	parametros = conParam("carrera",carrera,parametros);
 
-	var url = urlServidor+urlcargaCarreras;	
+	var url = urlServidor+urlAgregarAlumno;	
 	x.open('POST',url,false);
 	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	x.onreadystatechange = function() 
 	{
         if(x.status == 200 && x.readyState == 4)
 		{
-			document.getElementById("slcCarreras").innerHTML = x.responseText;			
+			console.log(x.responseText);
+			var datosJSON = JSON.parse(x.responseText);
+			
+			if(datosJSON.STATUS == 0)
+			{
+				toastr.success("guardado con exito");
+			}
+			if(datosJSON.STATUS == 1)
+			{
+				toastr.error("error al guardar");
+			}
 		}
 	}
 	x.send(parametros);

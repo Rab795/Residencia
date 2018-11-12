@@ -12,7 +12,7 @@
 
 
 	$campos="alu_id,alu_noControl,alu_nombre,alu_aPaterno,alu_aMaterno,alu_tel,car_nombre,alu_Status";
-	$tables="Alumnos INNER JOIN Carreras ON alu_idCarrera = car_id";
+	$tables="Alumnos LEFT JOIN Carreras ON alu_idCarrera = car_id";
 	$sWhere=" alu_noControl LIKE '%".$noControl."%'";
 	$sWhere.=" AND (alu_nombre LIKE '%".$nombre."%' OR alu_aPaterno LIKE '%".$nombre."%' OR alu_aMaterno LIKE '%".$nombre."%')";
 	if($carrera != ""){ $sWhere.=" AND alu_idCarrera = ".$carrera; }
