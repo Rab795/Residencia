@@ -58,7 +58,7 @@
 					while($row = mysqli_fetch_array($query)){
 					?>
 						<tr>
-							<td><a href="infoAlumno.html" onclick="cargaAlumno(<?php echo $row['alu_id']; ?>)"><?php echo $row['alu_noControl']; ?></a></td>
+							<td><a href="infoAlumno.html?id=<?php echo $row['alu_id']; ?>"><?php echo $row['alu_noControl']; ?></a></td>
 							<td><?php echo $row['alu_nombre']; ?></td>
 							<td><?php echo $row['alu_aPaterno']; ?></td>
 							<td><?php echo $row['alu_aMaterno']; ?></td>

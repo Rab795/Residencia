@@ -6,6 +6,11 @@ var urlcerrarsesion = 'php/cerrarSesion.php';
 var urlcargaAlumnos = 'php/paginadoAlumnos.php';
 var urlcargaCarreras = 'php/listaCarreras.php';
 var urlAgregarAlumno = 'php/agregarAlumno.php';
+var urlcargaEspecilidades = 'php/listaEspecialidades.php';
+var urlInfoAlumno = 'php/infoAlumno.php';
+var urlInfoPerfilAcademico = 'php/infoPerfilAcademico.php';
+var urlInfoCurriculumHabilidades = 'php/infoCurriculumHabilidades.php';
+var urlInfoCurriculumIdiomas = 'php/infoCurriculumIdiomas.php';
 
 function iniciarSesion()
 { 
@@ -124,6 +129,23 @@ function cargalistaCarreras(action){
 	x.send(parametros);
 }
 
+function cargalistaEspecialidades(action){
+	document.getElementById("slcEspec").innerHTML = "";
+	var idCarrera = document.getElementById("slcCarreras").value;
+	var parametros = "action="+action+"&idCarrera="+idCarrera;
+	var url = urlServidor+urlcargaEspecilidades;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("slcEspec").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
 function validarAlumno(){
 	var correcto =  true;
 	if(document.getElementById("inpNombre").value == "") { document.getElementById("divNombre").classList.add("has-error"); correcto = false; }
@@ -144,7 +166,7 @@ function guardarAlumno() {
 	var telefono = document.getElementById("inpTelefono").value;
 	var status = document.getElementById("slcEstatus").value;
 	var direccion = document.getElementById("inpDireccion").value;
-	var genero = document.getElementById("inpGenero").value;
+	var genero = document.querySelector('input[name="inpGenero"]:checked').value;
 	var fechaNacimeinto = document.getElementById("inpFechaN").value;
 	var nacionalidad = document.getElementById("inpNaci").value;
 	var edad = (document.getElementById("inpEdad").value != "")? document.getElementById("inpEdad").value : 0;
@@ -166,7 +188,7 @@ function guardarAlumno() {
 	parametros = conParam("carrera",carrera,parametros);
 
 	var url = urlServidor+urlAgregarAlumno;	
-	x.open('POST',url,false);
+	x.open('POST',url,true);
 	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	x.onreadystatechange = function() 
 	{
@@ -193,4 +215,121 @@ function conParam(eti,val,param){
 	if(param != "") param += "&"+eti+"="+val;
 	else {param += eti+"="+val}
 	return param;
+}
+
+
+function getVarsUrl()
+{
+    var url= location.search.replace("?", "");
+    var arrUrl = url.split("&");
+    var urlObj={};   
+    for(var i=0; i<arrUrl.length; i++)
+	{
+        var x= arrUrl[i].split("=");
+        urlObj[x[0]]=x[1]
+    }
+    return urlObj;
+}
+
+function infoAlumno(){
+	var idAlumno = getVarsUrl();
+	var parametros = "idAlumno="+idAlumno.id;
+	var url = urlServidor+urlInfoAlumno;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			var datosJSON = JSON.parse(x.responseText);
+			document.getElementById("txtNombre").textContent = datosJSON.NOMBRE+" "+datosJSON.AP+" "+datosJSON.AM;
+			document.getElementById("spNoControl").textContent = datosJSON.NOCONTROL;
+			document.getElementById("spTel").textContent = datosJSON.TEL;
+			document.getElementById("spCorreo").textContent = datosJSON.CORREO;
+			document.getElementById("spDireccion").textContent = datosJSON.DIRECCION;
+			document.getElementById("spFechaN").textContent = datosJSON.FECHAN;
+			document.getElementById("spEdad").textContent = datosJSON.EDAD;
+			document.getElementById("spNac").textContent = datosJSON.NACI;
+			document.getElementById("spStatus").textContent = datosJSON.STATUS;
+			document.getElementById("spCarrera").textContent = datosJSON.CARRERA;
+			if(datosJSON.GENERO.toLowerCase() == "m"){
+				document.getElementById("inpGeneroM").checked = true;	
+			}else{
+				document.getElementById("inpGeneroF").checked = true
+			}
+			
+		}
+	}
+	x.send(parametros);
+}
+
+urlInfoPerfilAcademico
+
+function infoPerfilAcademico() {
+	var idAlumno = getVarsUrl();
+	var parametros = "idAlumno="+idAlumno.id;
+	var url = urlServidor+urlInfoPerfilAcademico;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			if(x.responseText != ""){
+				var datosJSON = JSON.parse(x.responseText);
+				document.getElementById("spEsp").textContent = datosJSON.ESPECIALIDAD;
+				document.getElementById("spSemestre").textContent = datosJSON.SEMESTRE;
+				document.getElementById("spPromedio").textContent = datosJSON.PROMEDIO;
+				
+				if(datosJSON.SS == 1){
+					document.getElementById("ckSS").checked = true;	
+				}
+				if(datosJSON.CREDITOS == 1){
+					document.getElementById("ckCr").checked = true
+				}
+			}
+		}
+	}
+	x.send(parametros);
+}
+
+function infoCurriculumHabilidades() {
+	var idAlumno = getVarsUrl();
+	var parametros = "idAlumno="+idAlumno.id;
+	var url = urlServidor+urlInfoCurriculumHabilidades;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			if(x.responseText != ""){
+				document.getElementById("divHabilidades").innerHTML = x.responseText;		
+			}
+		}
+	}
+	x.send(parametros);
+}
+
+
+function infoCurriculumIdiomas() {
+	var idAlumno = getVarsUrl();
+	var parametros = "idAlumno="+idAlumno.id;
+	var url = urlServidor+urlInfoCurriculumIdiomas;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			if(x.responseText != ""){
+				document.getElementById("divIdiomas").innerHTML = x.responseText;		
+			}
+		}
+	}
+	x.send(parametros);
 }

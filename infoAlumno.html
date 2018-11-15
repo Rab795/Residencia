@@ -17,8 +17,6 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 	<!-- MIS ESTILOS -->
 	<link rel="stylesheet" href="assets/css/styles.css">
-	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
-	<!--<link rel="stylesheet" href="assets/css/demo.css"> -->
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<!-- ICONS -->
@@ -38,12 +36,6 @@
 				<div class="navbar-btn">
 					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
 				</div>
-				<!-- <form class="navbar-form navbar-left">
-					<div class="input-group">
-						<input type="text" value="" class="form-control" placeholder="Search dashboard...">
-						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
-					</div>
-				</form> -->
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -116,7 +108,7 @@
 									<div class="overlay"></div>
 									<div class="profile-main">
 										<img src="assets/img/profileStudent.jpg" class="img-circle" alt="Avatar" id="imgStudent">
-										<h3 class="name">Nombre ApellidoM ApellidoP</h3>
+										<h3 class="name" id="txtNombre">Nombre ApellidoM ApellidoP</h3>
 									</div>
 								</div>
 								<!-- END PROFILE HEADER -->
@@ -125,14 +117,24 @@
 									<div class="profile-info">
 										<h4 class="heading">Informacion General</h4>
 										<ul class="list-unstyled list-justify">
-											<li>No. Control <span>13211512</span></li>
-											<li>Telefono <span>664636783</span></li>
-											<li>Correo <span>rab@mydomain.com</span></li>
-											<li>Direccion <span>calle Estoril #23514 Villas</span></li>
-											<li>Fecha de nacimiento <span>23-09-1995</span></li>
-											<li>Edad <span>22</span></li>
-											<li>Nacionalidad <span>Mexicana</span></li>
-											<li>Status <span>Aspirante</span></li>
+											<li>No. Control <span id="spNoControl"></span></li>
+											<li>Telefono <span id="spTel"></span></li>
+											<li>Correo <span id="spCorreo"></span></li>
+											<li>Direccion <span id="spDireccion"></span></li>
+											<li>Fecha de nacimiento <span id="spFechaN"></span></li>
+											<li>Edad <span id="spEdad"></span></li>
+											<li>Genero <span>
+												<label class="fancy-radio checkHorizontal">
+													<input name="inpGenero" id="inpGeneroM" value="m" type="radio" disabled>
+													<span><i></i>M</span>
+												</label>
+												<label class="fancy-radio checkHorizontal">
+													<input name="inpGenero" id="inpGeneroF" value="f" type="radio" disabled>
+													<span><i></i>F</span>
+												</label>
+											</span></li>
+											<li>Nacionalidad <span id="spNac"></span></li>
+											<li>Status <span id="spStatus"></span></li>
 										</ul>
 									</div>
 									<div class="text-center"><a href="#" class="btn btn-primary">Editar</a></div>
@@ -153,15 +155,41 @@
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="tab-bottom-left1">															
 										<ul class="list-group list-group-flush list-justify">
-											<li class="list-group-item">Carrera: <span>Ing. en TIC</span></li>
-											<li class="list-group-item">Especialidad: <span>Dual</span></li>
-											<li class="list-group-item">Semestre: <span>9no</span></li>
-											<li class="list-group-item">Creditos: <span><label class="fancy-checkbox"><input type="checkbox"><span></span></label></span></li>
-											<li class="list-group-item">Servicio Social: <span><label class="fancy-checkbox"><input type="checkbox"><span></span></label></span></li>
-											<li class="list-group-item">Promedio: <span>90</span></li>
+											<li class="list-group-item">Carrera: <span id="spCarrera"></span></li>
+											<li class="list-group-item">Especialidad: <span id="spEsp"></span></li>
+											<li class="list-group-item">Semestre: <span id="spSemestre"></span></li>
+											<li class="list-group-item">Creditos: <span id="spCreditos"><label class="fancy-checkbox"><input type="checkbox" id="ckCr" disabled><span></span></label></span></li>
+											<li class="list-group-item">Servicio Social: <span id="spSS"><label class="fancy-checkbox"><input type="checkbox" id="ckSS" disabled><span></span></label></span></li>
+											<li class="list-group-item">Promedio: <span id="spPromedio"></span></li>
 										</ul>																				
 									</div>
 									<div class="tab-pane fade" id="tab-bottom-left2">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="panel">
+													<div class="panel-heading">
+														<h3 class="panel-title">Habilidades</h3>
+													</div>
+													<div class="panel-body" id="divHabilidades">
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="panel">
+													<div class="panel-heading">
+														<h3 class="panel-title">Idiomas</h3>
+													</div>
+													<div class="panel-body">
+														<div class="row" id="divIdiomas">
+															<!-- <div class="col-md-6">
+																<input type="text" value="75" class="dial">
+																<div class="knob-label">Bandwidth</div>
+															</div> -->
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 									<div class="tab-pane fade" id="tab-bottom-left3">
 										<div class="table-responsive">
@@ -207,8 +235,22 @@
 	<script src="assets/scripts/klorofil-common.js"></script>
 	<script src="assets/vendor/toastr/toastr.min.js"></script>
 	<script src="assets/scripts/funciones.js"></script>
+	<script src="assets/vendor/jQuery-Knob-1.2.13/dist/jquery.knob.min.js"></script>
 	<script type="text/javascript">
-		validarSesion();
+		if(validarSesion()){
+			infoAlumno();
+			infoPerfilAcademico();
+			infoCurriculumHabilidades();
+			infoCurriculumIdiomas();
+		}
+
+	    $(function() {
+	        $(".dial").knob({
+	        	'width':70,
+	        	'height':70,
+	        	'readOnly':true
+	        });
+	    });
 	</script>
 </body>
 

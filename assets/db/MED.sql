@@ -183,3 +183,38 @@ CREATE TABLE Materias(
 ALTER TABLE Materias ADD CONSTRAINT fk_Materias_Especialidades FOREIGN KEY(mat_idEspecialidad)
 REFERENCES Especialidades(esp_id);
 
+CREATE TABLE Idiomas(
+	idm_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    idm_nombre VARCHAR(100)
+);
+
+CREATE TABLE CV_Idiomas(
+	cvi_idCV INT NOT NULL,
+    cvi_idIdioma INT NOT NULL,
+    cvi_porcentaje FLOAT,
+    PRIMARY KEY (cvi_idCV, cvi_idIdioma)
+);
+
+ALTER TABLE CV_Idiomas ADD CONSTRAINT fk_IdCV FOREIGN KEY(cvi_idCV)
+REFERENCES CurriculumVitae(cv_id);
+
+ALTER TABLE CV_Idiomas ADD CONSTRAINT fk_IdIdioma FOREIGN KEY(cvi_idIdioma)
+REFERENCES Idiomas(idm_id);
+
+CREATE TABLE Habilidades(
+	hab_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    hab_nombre VARCHAR(100)
+);
+
+CREATE TABLE CV_Habilidades(
+	cvh_idCV INT NOT NULL,
+    cvh_idHab INT NOT NULL,
+    cvh_porcentaje FLOAT,
+    PRIMARY KEY (cvh_idCV, cvh_idHab)
+);
+
+ALTER TABLE CV_Habilidades ADD CONSTRAINT fk_IdCV2 FOREIGN KEY(cvh_idCV)
+REFERENCES CurriculumVitae(cv_id);
+
+ALTER TABLE CV_Habilidades ADD CONSTRAINT fk_IdHab FOREIGN KEY(cvh_idHab)
+REFERENCES Habilidades(hab_id);
