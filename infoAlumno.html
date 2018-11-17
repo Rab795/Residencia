@@ -137,7 +137,7 @@
 											<li>Status <span id="spStatus"></span></li>
 										</ul>
 									</div>
-									<div class="text-center"><a href="#" class="btn btn-primary">Editar</a></div>
+									<div class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInfoGeneral">Editar</button></div>
 								</div>
 								<!-- END PROFILE DETAIL -->
 							</div>
@@ -226,6 +226,57 @@
 		</footer>
 	</div>
 	<!-- END WRAPPER -->
+	<!-- Modales -->
+	<div class="modal fade" id="modalInfoGeneral" tabindex="-1" role="dialog" aria-labelledby="informacionGeneral" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Informacion General</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <ul class="list-unstyled list-justify">
+				<li>Nombre <span><input type="text" value=""></span></li>
+				<li>Ap. paterno <span><input type="text" value=""></span></li>
+				<li>Ap. materno <span><input type="text" value=""></span></li>
+				<li>No. Control <span><input type="text" value=""></span></li>
+				<li>Telefono <span><input type="text" value=""></span></li>
+				<li>Correo <span><input type="text" value=""></span></li>
+				<li>Direccion <span><input type="text" value=""></span></li>
+				<li>Fecha de nacimiento <span><input type="date" value=""></span></li>
+				<li>Edad <span><input type="number" value=""></span></li>
+				<li>Genero <span>
+					<label class="fancy-radio checkHorizontal">
+						<input name="inpGenero" id="inpGenero" value="m" type="radio">
+						<span><i></i>M</span>
+					</label>
+					<label class="fancy-radio checkHorizontal">
+						<input name="inpGenero" id="inpGenero" value="f" type="radio">
+						<span><i></i>F</span>
+					</label>
+				</span></li>
+				<li>Nacionalidad <span><input type="text" value=""></span></li>
+				<li>Status <span>
+					<select id="slcEstatus" name="inpEstatus">
+						<option value="Activo">Activo</option>
+						<option value="Aspirante">Aspirante</option>
+						<option value="Inactivo">Inactivo</option>
+						<option value="Titulado">Titulado</option>
+					</select>	
+				</span></li>
+			</ul>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-primary">Guardar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
 	<!-- Javascript -->
 	<script src="assets/vendor/jquery/jquery.min.js"></script>
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
