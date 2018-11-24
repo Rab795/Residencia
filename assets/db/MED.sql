@@ -163,7 +163,7 @@ ALTER TABLE PerfilAcademico ADD CONSTRAINT fk_PerfilAcademico_Especialidades FOR
 REFERENCES Especialidades(esp_id);
 
 ALTER TABLE PerfilAcademico ADD CONSTRAINT fk_PerfilAcademico_Alumnos FOREIGN KEY(pad_idAlumno)
-REFERENCES Alumnos(alu_id);
+REFERENCES Alumnos(alu_id) ON DELETE CASCADE;
 
 CREATE TABLE CurriculumVitae(
 	cv_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -171,7 +171,7 @@ CREATE TABLE CurriculumVitae(
 );
 
 ALTER TABLE CurriculumVitae ADD CONSTRAINT fk_CurriculumVitae_Alumnos FOREIGN KEY(cv_idAlumno)
-REFERENCES Alumnos(alu_id);
+REFERENCES Alumnos(alu_id) ON DELETE CASCADE;
 
 CREATE TABLE Materias(
 	mat_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -196,7 +196,7 @@ CREATE TABLE CV_Idiomas(
 );
 
 ALTER TABLE CV_Idiomas ADD CONSTRAINT fk_IdCV FOREIGN KEY(cvi_idCV)
-REFERENCES CurriculumVitae(cv_id);
+REFERENCES CurriculumVitae(cv_id) ON DELETE CASCADE;
 
 ALTER TABLE CV_Idiomas ADD CONSTRAINT fk_IdIdioma FOREIGN KEY(cvi_idIdioma)
 REFERENCES Idiomas(idm_id);
@@ -214,7 +214,7 @@ CREATE TABLE CV_Habilidades(
 );
 
 ALTER TABLE CV_Habilidades ADD CONSTRAINT fk_IdCV2 FOREIGN KEY(cvh_idCV)
-REFERENCES CurriculumVitae(cv_id);
+REFERENCES CurriculumVitae(cv_id) ON DELETE CASCADE;
 
 ALTER TABLE CV_Habilidades ADD CONSTRAINT fk_IdHab FOREIGN KEY(cvh_idHab)
 REFERENCES Habilidades(hab_id);

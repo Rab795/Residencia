@@ -3,6 +3,7 @@
 
 	require_once("conectar.php");	
 
+	$id = intval($_POST["id"]);
     $nombre = mysqli_real_escape_string($conectado,(strip_tags($_POST["nombre"],ENT_QUOTES)));
 	$apaterno = mysqli_real_escape_string($conectado,(strip_tags($_POST["apaterno"],ENT_QUOTES)));
 	$amaterno = mysqli_real_escape_string($conectado,(strip_tags($_POST["amaterno"],ENT_QUOTES)));
@@ -23,49 +24,34 @@
 	if ($carrera === 0) { $carrera = 'NULL'; }
 
 	// REGISTER data into database
-    $sql = "INSERT INTO Alumnos (alu_noControl,alu_nombre,alu_aPaterno,alu_aMaterno,alu_Status,alu_tel,alu_correo,alu_direccion,alu_genero,alu_fechaNacimeinto,alu_nacionalidad,alu_edad,alu_idCarrera)
-			VALUES ('$nocontrol','$nombre','$apaterno','$amaterno','$status','$telefono','$correo','$direccion','$genero',$fechaNacimeinto,'$nacionalidad',$edad,$carrera)";
+    $sql = "UPDATE Alumnos SET
+			alu_noControl = '$nocontrol',
+			alu_nombre = '$nombre',
+			alu_aPaterno = '$apaterno',
+			alu_aMaterno = '$amaterno',
+			alu_Status = '$status',
+			alu_tel = '$telefono',
+			alu_correo = '$correo',
+			alu_direccion = '$direccion',
+			alu_genero = '$genero',
+			alu_fechaNacimeinto = $fechaNacimeinto,
+			alu_nacionalidad = '$nacionalidad',
+			alu_edad = $edad,
+			alu_idCarrera = $carrera
+			WHERE alu_id = $id";
     
     $query = mysqli_query($conectado,$sql);
-    // if product has been added successfully 
+    // if product has been added successfully
     if ($query) {
-        $sql2 = "SELECT alu_id FROM Alumnos ORDER BY alu_id DESC LIMIT 1";
-        $query2 = mysqli_query($conectado,$sql2);
-		$datos = mysqli_fetch_array($query2,MYSQLI_ASSOC);
-		$idAlumno = $datos['alu_id'];
-
-		$sql3  = "INSERT INTO CurriculumVitae (cv_idAlumno) VALUES($idAlumno)";
-		$query3 = mysqli_query($conectado,$sql3);
-
-		if ($query3) {
-			$sql4 = "INSERT INTO PerfilAcademico (pad_idAlumno,pad_creditos,pad_servicioSocial,pad_promedio,pad_semestre) VALUES ($idAlumno,0,0,0,0)";
-			$query4 = mysqli_query($conectado,$sql4);
-
-			if ($query4) {
-				echo '{
-				"ID" : '.$idAlumno.',
+        echo '{
 				"STATUS" : 0,
 				"MENSAJE" : "Guardado con exito"
 				}';
-			}
-			else{
-				echo '{
-				"STATUS" : 1,
-				"MENSAJE" : "No se pudo guardar el PerfilAcademico"
-				}'; 
-			}
-			
-		}
-		else{
-			echo '{
-				"STATUS" : 1,
-				"MENSAJE" : "No se pudo guardar el CV"
-				}'; 
-		}
     } else {
         echo '{
 				"STATUS" : 1,
 				"MENSAJE" : "No se pudo guardar el registro"
 				}'; echo mysqli_error($conectado);
+				
     }
 ?>			

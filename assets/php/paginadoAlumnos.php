@@ -65,8 +65,8 @@
 							<td><?php echo $row['alu_tel']; ?></td>
 							<td><?php echo $row['car_nombre']; ?></td>
 							<td><?php echo $row['alu_Status']; ?></td>
-							<td><button class="btn btn-info"><i class="fa fa-edit"></i></button></td>
-							<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+							<td><button class="btn btn-info" onclick="redireccionarEditar(<?php echo $row['alu_id']; ?>)"><i class="fa fa-edit"></i></button></td>
+							<td><button class="btn btn-danger" data-toggle="modal" data-target="#mdlConfirm" onclick="idAlumnoEliminar = <?php echo $row['alu_id']; ?>;"><i class="fa fa-trash"></i></button></td>
 						</tr>
 					<?php
 						$finales++;

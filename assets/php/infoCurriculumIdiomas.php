@@ -16,9 +16,14 @@
 	//loop through fetched data
 	while($row = mysqli_fetch_array($query)){
 		?>
-			<div class="col-md-6">
-				<input type="text" value="<?php echo $row['cvi_porcentaje']; ?>" class="dial">
-				<div class="knob-label"><?php echo $row['idm_nombre']; ?></div>
+			<div class="col-md-6 stylish-panel">
+				<div class="right2">
+					<button type="button" class="col-md-2 md-menu md-edit-menu" title="Editar Idioma" data-toggle="modal" data-target="#mdlEditarIdioma" onclick="infoIdiomaModal(<?php echo $row['cv_id']; ?>,<?php echo $row['cvi_idIdioma']; ?>,'<?php echo $row['idm_nombre']; ?>',<?php echo $row['cvi_porcentaje']; ?>)"><i class="fas fa-ellipsis-v"></i></button>	
+				</div>
+				<div>
+					<input type="text" value="<?php echo $row['cvi_porcentaje']; ?>" class="dial">
+					<div class="knob-label"><?php echo $row['idm_nombre']; ?></div>				
+				</div>
 			</div>
 		<?php
 	}		

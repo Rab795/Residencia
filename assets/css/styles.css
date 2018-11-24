@@ -22,3 +22,38 @@
     float: left;
     margin-left: 20px;
 }
+
+.md-menu {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0.3;
+  width: var(--md-menu-size);
+}
+
+.md-menu:active,
+.md-menu:focus:not(.mouse-navigation) {
+  opacity: 1;
+}
+
+
+.md-menu:hover,
+.md-menu:focus {
+  opacity: 1;
+}
+
+.stylish-panel{
+	padding: 1px 7px 1px 7px;
+}
+
+.stylish-panel:hover{
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px 2px;
+    background: rgba(200, 200, 200, 0.1);
+    transition: 0.5s;
+    border-radius: 5px;
+}
+
+.right2{
+    position: absolute;
+    right: 0px;
+}

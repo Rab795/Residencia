@@ -53,3 +53,4 @@ INSERT INTO CV_Habilidades VALUES (1,1,92.6);
 INSERT INTO CV_Habilidades VALUES (1,3,55); 
 INSERT INTO CV_Habilidades VALUES (1,4,100); 
 
+INSERT INTO PerfilAcademico (pad_idAlumno, pad_creditos,pad_servicioSocial,pad_promedio,pad_semestre) VALUES (2,0,0,0,0);
