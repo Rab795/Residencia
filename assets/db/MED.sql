@@ -71,6 +71,7 @@ CREATE TABLE Proyecto(
 	pro_nombre VARCHAR(100),
 	pro_descripcion VARCHAR(2000),
 	pro_departamento VARCHAR(100),
+	pro_status VARCHAR(50),
 	pro_idEmpresa INT,
 	pro_idAsesorExterno INT,
     pro_idPeriodo INT

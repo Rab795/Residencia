@@ -23,6 +23,10 @@ var urlAgregarCVIdioma = 'php/agregarCVIdioma.php';
 var urlEditarCVIdioma = 'php/editarCVIdioma.php';
 var urlEliminarCVIdioma = 'php/eliminarCVIdioma.php';
 var urlEditarPerfilAcademico = 'php/editaPerfilAcademico.php';
+var urlcargaEmpresas = 'php/paginadoEmpresas.php';
+var urlInfoEmpresa = 'php/infoEmpresa.php';
+var urlcargaProyectosEmpresa = 'php/paginadoProyectosEmpresa.php';
+var urlcargaAsesoresEEmpresa = 'php/paginadoAsesoresExternosEmpresa.php';
  
 function iniciarSesion()
 { 
@@ -863,6 +867,97 @@ function editaPA() {
 			{
 				toastr.error("error al actualizar");
 			}
+		}
+	}
+	x.send(parametros);
+}
+
+//Empresas
+function cargaEmpresas(page){
+	var nombre = document.getElementById("inpNombre").value;
+	var rfc = document.getElementById("inpRFC").value;
+	var per_page=10;
+	var parametros = "";
+	parametros = conParam("funcion",cargaEmpresas,parametros);
+	parametros = conParam("page",page,parametros);
+	parametros = conParam("per_page",per_page,parametros);
+	parametros = conParam("nombre",nombre,parametros);
+	parametros = conParam("rfc",rfc,parametros);
+	
+	var url = urlServidor+urlcargaEmpresas;	
+	x.open('POST',url,true);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("respuestaAjax").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function infoEmpresa(){
+	var idEmpresa = getVarsUrl();
+	var parametros = "idEmpresa="+idEmpresa.id;
+	var url = urlServidor+urlInfoEmpresa;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			var datosJSON = JSON.parse(x.responseText);
+			document.getElementById("txtNombre").textContent = datosJSON.NOMBRE;
+			document.getElementById("spRFC").textContent = datosJSON.RFC;
+			document.getElementById("spDireccion").textContent = datosJSON.DIRECCION;
+			document.getElementById("spTel").textContent = datosJSON.TEL;
+			document.getElementById("spRamo").textContent = datosJSON.RAMO;		
+		}
+	}
+	x.send(parametros);
+}
+
+function cargaProyectosEmpresa(page){
+	var idEmpresa = getVarsUrl();
+	var per_page=10;
+	var parametros = "";
+	parametros = conParam("funcion",cargaProyectosEmpresa,parametros);
+	parametros = conParam("page",page,parametros);
+	parametros = conParam("per_page",per_page,parametros);
+	parametros = conParam("idEmpresa",idEmpresa.id,parametros);
+	
+	var url = urlServidor+urlcargaProyectosEmpresa;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("tab-bottom-left1").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function cargaAsesoresExternosEmpresa(page){
+	var idEmpresa = getVarsUrl();
+	var per_page=10;
+	var parametros = "";
+	parametros = conParam("funcion",cargaAsesoresExternosEmpresa,parametros);
+	parametros = conParam("page",page,parametros);
+	parametros = conParam("per_page",per_page,parametros);
+	parametros = conParam("idEmpresa",idEmpresa.id,parametros);
+	
+	var url = urlServidor+urlcargaAsesoresEEmpresa;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("tab-bottom-left2").innerHTML = x.responseText;			
 		}
 	}
 	x.send(parametros);

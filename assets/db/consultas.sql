@@ -112,4 +112,33 @@ pad_semestre = 1,
 pad_idEspecialidad = 1 
 WHERE pad_id = 1;
 
+SELECT emp_id,
+    emp_nombre,
+    emp_RFC,
+    emp_direccion,
+    emp_ramo,
+    emp_tel
+FROM Empresa WHERE emp_id = 1; 
+
+
+SELECT pro_id,
+    pro_nombre,
+    pro_descripcion,
+    pro_departamento,
+	pro_status,
+    pro_idEmpresa,
+    pro_idAsesorExterno,
+	ase_nombre,
+    pro_idPeriodo,
+	prd_descripcion
+FROM Proyecto INNER JOIN Periodos ON pro_idPeriodo = prd_id INNER JOIN AsesorExterno ON pro_idAsesorExterno = ase_id;
+
+SELECT ase_id,
+    ase_nombre,
+    ase_aPaterno,
+    ase_aMaterno,
+    ase_puesto,
+    ase_IdEmpresa
+FROM AsesorExterno;
+
 

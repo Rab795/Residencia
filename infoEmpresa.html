@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Alumnos | MED</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/vendor/fontawesome-free-5.5.0-web/css/all.css">
+	<link rel="stylesheet" href="assets/vendor/linearicons/style.css">
+	<link rel="stylesheet" href="assets/vendor/chartist/css/chartist-custom.css">
+	<link rel="stylesheet" href="assets/vendor/toastr/toastr.min.css">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="assets/css/main.css">
+	<!-- MIS ESTILOS -->
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<!-- GOOGLE FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/aprendizaje.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/aprendizaje.png">
+</head>
+
+<body>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="brand">
+				<a href="index.html"><img id="logoMED" src="assets/img/MED.png" alt="MED Logo" class="img-responsive logo"></a>
+			</div>
+			<div class="container-fluid">
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+				</div>
+				<div id="navbar-menu">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span id="TxtUser"></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#"><i class="lnr lnr-user"></i> <span>Mi Perfil</span></a></li>
+								<li><a href="#" onclick='cerrarsesion();'><i class="lnr lnr-exit"></i> <span>Cerrar Sesion</span></a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- END NAVBAR -->
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						<li><a href="index.html" class=""><i class="lnr lnr-home"></i> <span>Inicio</span></a></li>
+						<li>
+							<a href="#subPages3" data-toggle="collapse" class="collapse"><i class="lnr lnr-graduation-hat"></i> <span>Alumnos</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages3" class="collapse ">
+								<ul class="nav">
+									<li><a href="alumnos.php" class="">Buscar</a></li>
+									<li><a href="nuevoAlumno.html" class="">Agregar</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="#subPages4" data-toggle="collapse" class="active"><i class="lnr lnr-apartment"></i> <span>Empresas</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages4" class="collapse in">
+								<ul class="nav">
+									<li><a href="empresas.html" class="active">Buscar</a></li>
+									<li><a href="nuevaEmpresa.html" class="">Agregar</a></li>
+								</ul>
+							</div>
+						</li>
+						<li><a href="#" class=""><i class="lnr lnr-book"></i> <span>Proyectos</span></a></li>
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-users"></i> <span>Asesores</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="nav">
+									<li><a href="#" class="">Interno</a></li>
+									<li><a href="#" class="">Externo</a></li>
+								</ul>
+							</div>
+						</li>
+						<li><a href="#" class=""><i class="lnr lnr-chart-bars"></i> <span>Reportes</span></a></li>
+						<li><a href="#" class=""><i class="lnr lnr-dice"></i> <span>Herramientas</span></a></li>
+						<li>
+							<a href="#subPages2" data-toggle="collapse" class="collapsed"><i class="far fa-building"></i> <span>Institucion</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages2" class="collapse ">
+								<ul class="nav">
+									<li><a href="#" class="">Informacion</a></li>
+									<li><a href="#" class="">Periodos</a></li>
+									<li><a href="#" class="">Carreras</a></li>
+								</ul>
+							</div>
+						</li>
+						<li><a href="typography.html" class=""><i class="lnr lnr-cog"></i> <span>Configuracion</span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- END LEFT SIDEBAR -->
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<div class="panel panel-profile" id="panelPerfil">
+						<div class="clearfix">
+							<!-- LEFT COLUMN -->
+							<div class="profile-left">
+								<!-- PROFILE HEADER -->
+								<div class="profile-header">
+									<div class="overlay"></div>
+									<div class="profile-main">
+										<img src="assets/img/profileEmpresa2.jpg" class="img-circle" alt="Avatar" id="imgStudent">
+										<h3 class="name" id="txtNombre"></h3>
+									</div>
+								</div>
+								<!-- END PROFILE HEADER -->
+								<!-- PROFILE DETAIL -->
+								<div class="profile-detail">
+									<div class="profile-info">
+										<h4 class="heading">Informacion General</h4>
+										<ul class="list-unstyled list-justify">
+											<li>RFC <span id="spRFC"></span></li>
+											<li>Direccion <span id="spDireccion"></span></li>
+											<li>Telefono <span id="spTel"></span></li>
+											<li>Ramo <span id="spRamo"></span></li>
+										</ul>
+									</div>
+									<div class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInfoGeneral" onclick="infoEmpresaModal()">Editar</button></div>
+								</div>
+								<!-- END PROFILE DETAIL -->
+							</div>
+							<!-- END LEFT COLUMN -->
+							<!-- RIGHT COLUMN -->
+							<div class="profile-right">
+								<!-- TABBED CONTENT -->
+								<div class="custom-tabs-line tabs-line-bottom left-aligned">
+									<ul class="nav" role="tablist">
+										<li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">Proyectos</a></li>
+										<li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">Asesores</a></li>
+									</ul>
+								</div>
+								<div class="tab-content">
+									<div class="tab-pane fade in active" id="tab-bottom-left1"></div>
+									<div class="tab-pane fade" id="tab-bottom-left2"></div>
+								</div>
+								<!-- END TABBED CONTENT -->
+							</div>
+							<!-- END RIGHT COLUMN -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+		<!-- END MAIN -->
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">&copy; 2018 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+			</div>
+		</footer>
+	</div>
+	<!-- END WRAPPER -->
+	<!-- Modales -->
+	<div class="modal fade" id="modalInfoGeneral" tabindex="-1" role="dialog" aria-labelledby="informacionGeneral" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">Informacion General</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<form>
+	      		<div class="form-group row">
+				    <label for="inpMNombre" class="col-sm-3 col-form-label">Nombre *</label>
+				    <div class="col-sm-9" id="divMNombre">
+				      <input type="text" class="form-control" id="inpMNombre" placeholder="apellido paterno">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMAP" class="col-sm-3 col-form-label">Ap. paterno *</label>
+				    <div class="col-sm-9" id="divMAp">
+				      <input type="text" class="form-control" id="inpMAP" placeholder="apellido paterno">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMAM" class="col-sm-3 col-form-label">Ap. materno *</label>
+				    <div class="col-sm-9" id="divMAm">
+				      <input type="text" class="form-control" id="inpMAM" placeholder="apellido materno">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMNoControl" class="col-sm-3 col-form-label">No. Control *</label>
+				    <div class="col-sm-9" id="divMNoControl">
+				      <input type="text" class="form-control" id="inpMNoControl" placeholder="Numero de control">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMCarrera" class="col-sm-3 col-form-label">Carrera *</label>
+				    <div class="col-sm-9" id="divMCarrera">
+				      <select class="form-control" id="slcCarreras"></select>
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMTelefono" class="col-sm-3 col-form-label">Telefono</label>
+				    <div class="col-sm-9">
+				      <input type="text" class="form-control" id="inpMTelefono" placeholder="Telefono">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMCorreo" class="col-sm-3 col-form-label">Correo *</label>
+				    <div class="col-sm-9" id="divMCorreo">
+				      <input type="text" class="form-control" id="inpMCorreo" placeholder="Correo">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMDireccion" class="col-sm-3 col-form-label">Direccion</label>
+				    <div class="col-sm-9">
+				      <input type="text" class="form-control" id="inpMDireccion" placeholder="Direccion">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMFN" class="col-sm-3 col-form-label">Fecha de nacimiento</label>
+				    <div class="col-sm-9">
+				      <input type="date" class="form-control" id="inpMFN" placeholder="Fecha de nacimiento">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMEdad" class="col-sm-3 col-form-label">Edad</label>
+				    <div class="col-sm-9">
+				      <input type="number" class="form-control" id="inpMEdad" placeholder="Edad">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMGenero" class="col-sm-3 col-form-label">Genero</label>
+				    <div class="col-sm-9">
+				      <label class="fancy-radio checkHorizontal">
+							<input name="inpMGenero" id="inpMGeneroM" value="m" type="radio">
+							<span><i></i>M</span>
+						</label>
+						<label class="fancy-radio checkHorizontal">
+							<input name="inpMGenero" id="inpMGeneroF" value="f" type="radio">
+							<span><i></i>F</span>
+						</label>
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMNacionalidad" class="col-sm-3 col-form-label">Nacionalidad</label>
+				    <div class="col-sm-9">
+				      <input type="text" class="form-control" id="inpMNacionalidad" placeholder="Nacionalidad">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="slcMEstatus" class="col-sm-3 col-form-label">Status</label>
+				    <div class="col-sm-9">
+				      <select id="slcMEstatus" class="form-control" name="slcMEstatus">
+							<option value="Activo">Activo</option>
+							<option value="Aspirante">Aspirante</option>
+							<option value="Inactivo">Inactivo</option>
+							<option value="Titulado">Titulado</option>
+						</select>
+				    </div>
+				</div>	
+	      	</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-primary" onclick="validarAlumnoModal()">Guardar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade bd-example-modal-sm" id="mdlEditarHabilidad" tabindex="-1" role="dialog" aria-labelledby="mdlEditarHabilidad" aria-hidden="true">
+	  <div class="modal-dialog modal-sm">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Editar Habilidad</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	        	<div class="form-group">
+				    <label for="inpMNombreH" class="col-form-label">Nombre*</label>
+				    <div id="divMNombreH">
+				      <input type="text" class="form-control" id="inpMNombreH" placeholder="Nombre" readonly>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label for="inpMPorcentajeH" class="col-form-label">Porcentaje*</label>
+				    <div id="divMPorcentajeH">
+				      <input type="number" min="0" max="100"  class="form-control" id="inpMPorcentajeH" placeholder="Porcentaje">
+				    </div>
+				</div>
+				<div style="display:none;">
+					<input type="text" id="inpMidCV">
+					<input type="text" id="inpMidHab">
+				</div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger pull-left" onclick="eliminaCVHabilidad();"><i class="fa fa-trash"></i>Eliminar</button>
+	        <button type="button" class="btn btn-primary" onclick="editaCVHabilidad();">Guardar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade bd-example-modal-sm" id="mdlAgregarHabilidad" tabindex="-1" role="dialog" aria-labelledby="mdlAgregarHabilidad" aria-hidden="true">
+	  <div class="modal-dialog modal-sm">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Agregar Habilidad</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	        	<div class="form-group">
+				    <label for="inpMANombreH" class="col-form-label">Habilidad*</label>
+				    <div id="divMANombreH">
+				      <select class="form-control" id="slcMAHabilidades"></select>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label for="inpMAPorcentajeH" class="col-form-label">Porcentaje*</label>
+				    <div id="divMAPorcentajeH">
+				      <input type="number" min="0" max="100"  class="form-control" id="inpMAPorcentajeH" placeholder="Porcentaje" value="0">
+				    </div>
+				</div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-primary" onclick="validarCVHabilidad();">Guardar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade bd-example-modal-sm" id="mdlAgregarIdioma" tabindex="-1" role="dialog" aria-labelledby="mdlAgregarIdioma" aria-hidden="true">
+	  <div class="modal-dialog modal-sm">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Agregar Idioma</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	        	<div class="form-group">
+				    <label for="slcMAIdiomas" class="col-form-label">Idioma*</label>
+				    <div id="divMAIdoma">
+				      <select class="form-control" id="slcMAIdiomas"></select>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label for="inpMAPorcentajeI" class="col-form-label">Porcentaje*</label>
+				    <div id="divMAPorcentajeI">
+				      <input type="number" min="0" max="100"  class="form-control" id="inpMAPorcentajeI" placeholder="Porcentaje" value="0" onclick="this.select();">
+				    </div>
+				</div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-primary" onclick="validarCVIdioma();">Guardar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade bd-example-modal-sm" id="mdlEditarIdioma" tabindex="-1" role="dialog" aria-labelledby="mdlEditarIdioma" aria-hidden="true">
+	  <div class="modal-dialog modal-sm">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Editar Idioma</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	        	<div class="form-group">
+				    <label for="inpMEIdioma" class="col-form-label">Idioma*</label>
+				    <div id="divMEIdioma">
+				      <input type="text" class="form-control" id="inpMEIdioma" placeholder="Nombre" readonly>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label for="inpMEPorcentajeI" class="col-form-label">Porcentaje*</label>
+				    <div id="divMEPorcentajeI">
+				      <input type="number" min="0" max="100"  class="form-control" id="inpMEPorcentajeI" placeholder="Porcentaje">
+				    </div>
+				</div>
+				<div style="display:none;">
+					<input type="text" id="inpMidCVI">
+					<input type="text" id="inpMidIdm">
+				</div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger pull-left" onclick="eliminaCVIdioma();"><i class="fa fa-trash"></i>Eliminar</button>
+	        <button type="button" class="btn btn-primary" onclick="editaCVIdioma();">Guardar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="modalInfoPA" tabindex="-1" role="dialog" aria-labelledby="modalInfoPA" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">Perfil Academico</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<form>
+	      		<div class="form-group row">
+				    <label for="inpMEspec" class="col-sm-3 col-form-label">Especialidad</label>
+				    <div class="col-sm-9" id="divMEspec">
+				      <select class="form-control" value="0" id="slcEspec"></select>	
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMSemestre" class="col-sm-3 col-form-label">Semestre</label>
+				    <div class="col-sm-9" id="divMSemestre">
+				      <input type="number" class="form-control" id="inpMSemestre" placeholder="Semestre">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMCreditos" class="col-sm-3 col-form-label">Creditos</label>
+				    <div class="col-sm-9" id="divMCreditos">
+				      <input type="checkbox" class="form-control" id="inpMCreditos">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMSS" class="col-sm-3 col-form-label">Servicio Social</label>
+				    <div class="col-sm-9" id="divMSS">
+				      <input type="checkbox" class="form-control" id="inpMSS">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMPromedio" class="col-sm-3 col-form-label">Promedio</label>
+				    <div class="col-sm-9">
+				      <input class="form-control" min="0" max="100" type="number" step="0.01" value="0" id="inpMPromedio">
+				    </div>
+				</div>
+				<input style="display: none;" id="inpIdPA">
+	      	</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-primary" onclick="editaPA()">Guardar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Javascript -->
+	<script src="assets/vendor/jquery/jquery.min.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+	<script src="assets/vendor/chartist/js/chartist.min.js"></script>
+	<script src="assets/scripts/klorofil-common.js"></script>
+	<script src="assets/vendor/toastr/toastr.min.js"></script>
+	<script src="assets/scripts/funciones.js"></script>
+	<script src="assets/vendor/jQuery-Knob-1.2.13/dist/jquery.knob.min.js"></script>
+	<script type="text/javascript">
+		if(validarSesion()){
+			infoEmpresa();
+			cargaProyectosEmpresa(1);
+			cargaAsesoresExternosEmpresa(1);
+			//infoCurriculumHabilidades();
+			//infoCurriculumIdiomas();
+		}
+	</script>
+</body>
+
+</html>
