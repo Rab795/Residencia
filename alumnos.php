@@ -135,7 +135,6 @@
 									</div>
 								</div>
 							</div>
-						</div>
 							<div class="panel-body" id="respuestaAjax">
 								<!--respuestaAjax-->
 							</div>

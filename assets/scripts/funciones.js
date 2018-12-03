@@ -27,7 +27,15 @@ var urlcargaEmpresas = 'php/paginadoEmpresas.php';
 var urlInfoEmpresa = 'php/infoEmpresa.php';
 var urlcargaProyectosEmpresa = 'php/paginadoProyectosEmpresa.php';
 var urlcargaAsesoresEEmpresa = 'php/paginadoAsesoresExternosEmpresa.php';
- 
+var urlAgregarEmpresa = 'php/agregarEmpresa.php';
+var urlEditarEmpresa = 'php/editarEmpresa.php';
+var urlEliminarEmpresa = 'php/eliminarEmpresa.php'; 
+var urlcargaPeriodos = 'php/listaPeriodos.php';
+var urlcargaProyectos = 'php/paginadoProyectos.php';
+var urlInfoProyecto = 'php/infoProyecto.php';
+var urlInfoConvenio = 'php/infoConvenio.php';
+var urlcargaAlumnosProyecto = 'php/paginadoAlumnosProyecto.php';
+
 function iniciarSesion()
 { 
 	var url = urlServidor+urlLogin;
@@ -218,7 +226,7 @@ function guardarAlumno() {
 			if(datosJSON.STATUS == 0)
 			{
 				toastr.success("guardado con exito");
-				setTimeout(redireccionarEditar, 3000, datosJSON.ID);
+				setTimeout(redireccionarEditar, 2000, datosJSON.ID);
 			}
 			if(datosJSON.STATUS == 1)
 			{
@@ -921,7 +929,7 @@ function infoEmpresa(){
 
 function cargaProyectosEmpresa(page){
 	var idEmpresa = getVarsUrl();
-	var per_page=10;
+	var per_page=5;
 	var parametros = "";
 	parametros = conParam("funcion",cargaProyectosEmpresa,parametros);
 	parametros = conParam("page",page,parametros);
@@ -935,7 +943,7 @@ function cargaProyectosEmpresa(page){
 	{
         if(x.status == 200 && x.readyState == 4)
 		{
-			document.getElementById("tab-bottom-left1").innerHTML = x.responseText;			
+			document.getElementById("contenidoAjax1").innerHTML = x.responseText;			
 		}
 	}
 	x.send(parametros);
@@ -943,7 +951,7 @@ function cargaProyectosEmpresa(page){
 
 function cargaAsesoresExternosEmpresa(page){
 	var idEmpresa = getVarsUrl();
-	var per_page=10;
+	var per_page=5;
 	var parametros = "";
 	parametros = conParam("funcion",cargaAsesoresExternosEmpresa,parametros);
 	parametros = conParam("page",page,parametros);
@@ -957,7 +965,278 @@ function cargaAsesoresExternosEmpresa(page){
 	{
         if(x.status == 200 && x.readyState == 4)
 		{
-			document.getElementById("tab-bottom-left2").innerHTML = x.responseText;			
+			document.getElementById("contenidoAjax2").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function validarEmpresa(){
+	var correcto =  true;
+	if(document.getElementById("inpNombre").value == "") { document.getElementById("divNombre").classList.add("has-error"); correcto = false; }
+	if(document.getElementById("inpRFC").value == "") { document.getElementById("divRFC").classList.add("has-error"); correcto = false; }
+	if (correcto){ guardarEmpresa(); }
+	else { toastr.error("Parametros Incompletos"); } 
+}
+
+function guardarEmpresa(){
+	var nombre = document.getElementById("inpNombre").value;
+	var rfc = document.getElementById("inpRFC").value;
+	var direccion = document.getElementById("inpDireccion").value;
+	var telefono = document.getElementById("inpTelefono").value;
+	var ramo = document.getElementById("inpRamo").value;
+	
+	var parametros = "";
+	parametros = conParam("nombre",nombre,parametros);
+	parametros = conParam("rfc",rfc,parametros);
+	parametros = conParam("direccion",direccion,parametros);
+	parametros = conParam("telefono",telefono,parametros);
+	parametros = conParam("ramo",ramo,parametros);
+
+	var url = urlServidor+urlAgregarEmpresa;	
+	x.open('POST',url,true);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			var datosJSON = JSON.parse(x.responseText);
+			
+			if(datosJSON.STATUS == 0)
+			{
+				toastr.success("guardado con exito");
+				setTimeout(redireccionarEditarEmpresa, 2000, datosJSON.ID);
+			}
+			if(datosJSON.STATUS == 1)
+			{
+				toastr.error("error al guardar");
+			}
+		}
+	}
+	x.send(parametros);
+}
+
+function redireccionarEditarEmpresa(id){
+	location.href ="http://localhost/MED/infoEmpresa.html?id="+id;
+}
+
+function infoEmpresaModal(){
+	var idEmpresa = getVarsUrl();
+	var parametros = "idEmpresa="+idEmpresa.id;
+	var url = urlServidor+urlInfoEmpresa;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			var datosJSON = JSON.parse(x.responseText);
+			document.getElementById("inpMNombre").value = datosJSON.NOMBRE;
+			document.getElementById("inpMRFC").value = datosJSON.RFC;
+			document.getElementById("inpMDireccion").value = datosJSON.DIRECCION;
+			document.getElementById("inpMTelefono").value = datosJSON.TEL;
+			document.getElementById("inpMRamo").value = datosJSON.RAMO;		
+		}
+	}
+	x.send(parametros);
+}
+
+function validarEmpresaModal(){
+	var correcto =  true;
+	if(document.getElementById("inpMNombre").value == "") { document.getElementById("divMNombre").classList.add("has-error"); correcto = false; }
+	if(document.getElementById("inpMRFC").value == "") { document.getElementById("divMRFC").classList.add("has-error"); correcto = false; }
+	if (correcto){ editaEmpresa(); }
+	else { toastr.error("Parametros Incompletos"); } 
+}
+
+function editaEmpresa() {
+	var idEmpresa = getVarsUrl();
+	var nombre = document.getElementById("inpMNombre").value;
+	var rfc = document.getElementById("inpMRFC").value;
+	var direccion = document.getElementById("inpMDireccion").value;
+	var telefono = document.getElementById("inpMTelefono").value;
+	var ramo = document.getElementById("inpMRamo").value;
+
+	var parametros = "";
+	parametros = conParam("id",idEmpresa.id,parametros);
+	parametros = conParam("nombre",nombre,parametros);
+	parametros = conParam("rfc",rfc,parametros);
+	parametros = conParam("direccion",direccion,parametros);
+	parametros = conParam("telefono",telefono,parametros);
+	parametros = conParam("ramo",ramo,parametros);
+
+	var url = urlServidor+urlEditarEmpresa;	
+	x.open('POST',url,true);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			var datosJSON = JSON.parse(x.responseText);
+			
+			if(datosJSON.STATUS == 0)
+			{
+				toastr.success("actualizado con exito");
+				$('#modalInfoGeneral').modal('hide');
+				infoEmpresa();
+			}
+			if(datosJSON.STATUS == 1)
+			{
+				toastr.error("error al guardar");
+			}
+		}
+	}
+	x.send(parametros);
+
+}
+
+var idEmpresaEliminar = 0;
+function eliminarEmpresa(){
+	var parametros = "";
+	parametros = conParam("idEmpresa",idEmpresaEliminar,parametros);
+
+	var url = urlServidor+urlEliminarEmpresa;	
+	x.open('POST',url,true);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			var datosJSON = JSON.parse(x.responseText);
+			
+			if(datosJSON.STATUS == 0)
+			{
+				toastr.success("eliminado con exito");
+				$('#mdlConfirm').modal('hide');
+				cargaEmpresas(1);
+			}
+			if(datosJSON.STATUS == 1)
+			{
+				toastr.error("error al eliminar");
+			}
+		}
+	}
+	x.send(parametros);
+}
+
+function cargalistaPeriodos(action){
+	document.getElementById("slcPeriodos").innerHTML = "";
+	var parametros = "action="+action;
+	var url = urlServidor+urlcargaPeriodos;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("slcPeriodos").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function cargaProyectos(page){
+	var nombre = document.getElementById("inpNombre").value;
+	var empresa = document.getElementById("inpEmpresa").value;
+	var periodo = document.getElementById("slcPeriodos").value;
+	var status = document.getElementById("slcStatus").value;
+	var per_page = 10;
+	var parametros = "";
+	parametros = conParam("funcion",cargaProyectos,parametros);
+	parametros = conParam("page",page,parametros);
+	parametros = conParam("per_page",per_page,parametros);
+	parametros = conParam("nombre",nombre,parametros);
+	parametros = conParam("empresa",empresa,parametros);
+	parametros = conParam("periodo",periodo,parametros);
+	parametros = conParam("status",status,parametros);
+
+	var url = urlServidor+urlcargaProyectos;	
+	x.open('POST',url,true);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("respuestaAjax").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function infoProyecto(){
+	var idproyecto = getVarsUrl();
+	var parametros = "idProyecto="+idproyecto.id;
+	var url = urlServidor+urlInfoProyecto;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			var datosJSON = JSON.parse(x.responseText);
+			document.getElementById("spTitulo").textContent = datosJSON.TITULO;
+			document.getElementById("spDescrip").textContent = datosJSON.DESCRIPCION;
+			document.getElementById("spDepa").textContent = datosJSON.DEPARTAMENTO;
+			document.getElementById("spEmpresa").textContent = datosJSON.EMPRESA;
+			document.getElementById("spAE").textContent = datosJSON.ASESORE;		
+			document.getElementById("spPeriodo").textContent = datosJSON.PERIODO;		
+			document.getElementById("spStatus").textContent = datosJSON.STATUS;
+			if(datosJSON.STATUS == "Activo"){
+				document.getElementById("spStatus").classList.add("label-success");
+			}else
+			{
+				document.getElementById("spStatus").classList.add("label-default");
+			} 		
+		}
+	}
+	x.send(parametros);
+}
+
+function infoConvenio(){
+	var idproyecto = getVarsUrl();
+	var parametros = "idProyecto="+idproyecto.id;
+	var url = urlServidor+urlInfoConvenio;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			if (x.responseText != "") {
+				var datosJSON = JSON.parse(x.responseText);
+				document.getElementById("spNoEstudiantes").textContent = datosJSON.NOESTUDIANTES;
+				document.getElementById("spJornada").textContent = datosJSON.JORNADA;
+				document.getElementById("spHorario").textContent = datosJSON.HORARIO;
+				document.getElementById("spDuracion").textContent = datosJSON.DURACION;
+			}
+		}
+	}
+	x.send(parametros);
+}
+
+function cargaAlumnosProyecto(page){
+	var idproyecto = getVarsUrl();
+	var per_page=5;
+	var parametros = "";
+	parametros = conParam("funcion",cargaAlumnosProyecto,parametros);
+	parametros = conParam("page",page,parametros);
+	parametros = conParam("per_page",per_page,parametros);
+	parametros = conParam("idproyecto",idproyecto.id,parametros);
+	
+	var url = urlServidor+urlcargaAlumnosProyecto;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("contenidoAjax2").innerHTML = x.responseText;			
 		}
 	}
 	x.send(parametros);

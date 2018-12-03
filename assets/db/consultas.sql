@@ -127,11 +127,16 @@ SELECT pro_id,
     pro_departamento,
 	pro_status,
     pro_idEmpresa,
+    emp_nombre,
     pro_idAsesorExterno,
 	ase_nombre,
     pro_idPeriodo,
 	prd_descripcion
-FROM Proyecto INNER JOIN Periodos ON pro_idPeriodo = prd_id INNER JOIN AsesorExterno ON pro_idAsesorExterno = ase_id;
+FROM Proyecto LEFT JOIN Periodos ON pro_idPeriodo = prd_id 
+LEFT JOIN AsesorExterno ON pro_idAsesorExterno = ase_id 
+INNER JOIN Empresa ON pro_idEmpresa = emp_id;
+
+SELECT * FROM Proyecto;
 
 SELECT ase_id,
     ase_nombre,
@@ -140,5 +145,41 @@ SELECT ase_id,
     ase_puesto,
     ase_IdEmpresa
 FROM AsesorExterno;
+
+INSERT INTO Empresa
+(emp_nombre,
+emp_RFC,
+emp_direccion,
+emp_ramo,
+emp_tel)
+VALUES
+("","","","","");
+
+UPDATE Empresa
+SET
+emp_id = "",
+emp_nombre = "",
+emp_RFC = "",
+emp_direccion = "",
+emp_ramo = "",
+emp_tel = ""
+WHERE emp_id = "";
+
+DELETE FROM Empresa
+WHERE emp_id = 1;
+
+SELECT con_id,
+    con_PPIED,
+    con_noEstudiantes,
+    con_jornada,
+    con_horario,
+    con_duracion,
+    con_idProyecto
+FROM Convenio;
+
+
+UPDATE Alumnos SET
+alu_idProyecto = 1
+WHERE alu_id = 2;
 
 

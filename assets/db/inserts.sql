@@ -24,6 +24,7 @@ INSERT INTO Periodos VALUEs (2,"Ene-Jun 2018","2018-01-24","2018-06-16");
 INSERT INTO Empresa VALUES (1, "Plantronics","PL09232343423","Blvd. Bellas Artes Otay","Electronica","6642347654");
 INSERT INTO AsesorExterno VALUES (1,"Jose","Martinez","Rodriguez","Gerente",1);
 INSERT INTO Proyecto VALUES (1,"Desarollo de MRP","desc","Sistemas","Activo",1,1,1);
+INSERT INTO Convenio VALUES (1,"",4,"Diurna","8am-5pm","6 meses",1);
 
 INSERT INTO Alumnos VALUES (1,"13211512","Salvador","Rabago","Cruz","Activo","6643678166","src@gmail.com","23355 col cacho","M","1995-04-07","Mexicana",23,1,1,1,1);
 
@@ -38,5 +39,3 @@ INSERT INTO CV_Idiomas VALUES (1,2,50);
 INSERT INTO CV_Habilidades VALUES (1,1,92.6); 
 INSERT INTO CV_Habilidades VALUES (1,3,55); 
 INSERT INTO CV_Habilidades VALUES (1,4,100); 
-
-INSERT INTO PerfilAcademico (pad_idAlumno, pad_creditos,pad_servicioSocial,pad_promedio,pad_semestre) VALUES (1,0,0,0,0);

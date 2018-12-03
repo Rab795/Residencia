@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Alumnos | MED</title>
+	<title>Empresa | MED</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -146,8 +146,18 @@
 									</ul>
 								</div>
 								<div class="tab-content">
-									<div class="tab-pane fade in active" id="tab-bottom-left1"></div>
-									<div class="tab-pane fade" id="tab-bottom-left2"></div>
+									<div class="tab-pane fade in active" id="tab-bottom-left1">
+										<button type="button" class="btn btn-default pull-right"><i class="fa fa-plus-square"></i> Agregar </button>
+										<br>
+										<br>
+										<div class="panel" id="contenidoAjax1"></div>
+									</div>
+									<div class="tab-pane fade" id="tab-bottom-left2">
+										<button type="button" class="btn btn-default pull-right"><i class="fa fa-plus-square"></i> Agregar </button>
+										<br>
+										<br>
+										<div class="panel" id="contenidoAjax2"></div>
+									</div>
 								</div>
 								<!-- END TABBED CONTENT -->
 							</div>
@@ -182,290 +192,38 @@
 	      		<div class="form-group row">
 				    <label for="inpMNombre" class="col-sm-3 col-form-label">Nombre *</label>
 				    <div class="col-sm-9" id="divMNombre">
-				      <input type="text" class="form-control" id="inpMNombre" placeholder="apellido paterno">
+				      <input type="text" class="form-control" id="inpMNombre" placeholder="Nombre">
 				    </div>
 				</div>
 				<div class="form-group row">
-				    <label for="inpMAP" class="col-sm-3 col-form-label">Ap. paterno *</label>
-				    <div class="col-sm-9" id="divMAp">
-				      <input type="text" class="form-control" id="inpMAP" placeholder="apellido paterno">
-				    </div>
-				</div>
-				<div class="form-group row">
-				    <label for="inpMAM" class="col-sm-3 col-form-label">Ap. materno *</label>
-				    <div class="col-sm-9" id="divMAm">
-				      <input type="text" class="form-control" id="inpMAM" placeholder="apellido materno">
-				    </div>
-				</div>
-				<div class="form-group row">
-				    <label for="inpMNoControl" class="col-sm-3 col-form-label">No. Control *</label>
-				    <div class="col-sm-9" id="divMNoControl">
-				      <input type="text" class="form-control" id="inpMNoControl" placeholder="Numero de control">
-				    </div>
-				</div>
-				<div class="form-group row">
-				    <label for="inpMCarrera" class="col-sm-3 col-form-label">Carrera *</label>
-				    <div class="col-sm-9" id="divMCarrera">
-				      <select class="form-control" id="slcCarreras"></select>
-				    </div>
-				</div>
-				<div class="form-group row">
-				    <label for="inpMTelefono" class="col-sm-3 col-form-label">Telefono</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="inpMTelefono" placeholder="Telefono">
-				    </div>
-				</div>
-				<div class="form-group row">
-				    <label for="inpMCorreo" class="col-sm-3 col-form-label">Correo *</label>
-				    <div class="col-sm-9" id="divMCorreo">
-				      <input type="text" class="form-control" id="inpMCorreo" placeholder="Correo">
+				    <label for="inpMRFC" class="col-sm-3 col-form-label">RFC *</label>
+				    <div class="col-sm-9" id="divMRFC">
+				      <input type="text" class="form-control" id="inpMRFC" placeholder="RFC">
 				    </div>
 				</div>
 				<div class="form-group row">
 				    <label for="inpMDireccion" class="col-sm-3 col-form-label">Direccion</label>
-				    <div class="col-sm-9">
+				    <div class="col-sm-9" id="divMDireccion">
 				      <input type="text" class="form-control" id="inpMDireccion" placeholder="Direccion">
 				    </div>
 				</div>
 				<div class="form-group row">
-				    <label for="inpMFN" class="col-sm-3 col-form-label">Fecha de nacimiento</label>
-				    <div class="col-sm-9">
-				      <input type="date" class="form-control" id="inpMFN" placeholder="Fecha de nacimiento">
+				    <label for="inpMTelefono" class="col-sm-3 col-form-label">Telefono</label>
+				    <div class="col-sm-9" id="divMTelefono">
+				      <input type="text" class="form-control" id="inpMTelefono" placeholder="Telefono">
 				    </div>
 				</div>
 				<div class="form-group row">
-				    <label for="inpMEdad" class="col-sm-3 col-form-label">Edad</label>
+				    <label for="inpMRamo" class="col-sm-3 col-form-label">Ramo</label>
 				    <div class="col-sm-9">
-				      <input type="number" class="form-control" id="inpMEdad" placeholder="Edad">
+				      <input type="text" class="form-control" id="inpMRamo" placeholder="Ramo">
 				    </div>
 				</div>
-				<div class="form-group row">
-				    <label for="inpMGenero" class="col-sm-3 col-form-label">Genero</label>
-				    <div class="col-sm-9">
-				      <label class="fancy-radio checkHorizontal">
-							<input name="inpMGenero" id="inpMGeneroM" value="m" type="radio">
-							<span><i></i>M</span>
-						</label>
-						<label class="fancy-radio checkHorizontal">
-							<input name="inpMGenero" id="inpMGeneroF" value="f" type="radio">
-							<span><i></i>F</span>
-						</label>
-				    </div>
-				</div>
-				<div class="form-group row">
-				    <label for="inpMNacionalidad" class="col-sm-3 col-form-label">Nacionalidad</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="inpMNacionalidad" placeholder="Nacionalidad">
-				    </div>
-				</div>
-				<div class="form-group row">
-				    <label for="slcMEstatus" class="col-sm-3 col-form-label">Status</label>
-				    <div class="col-sm-9">
-				      <select id="slcMEstatus" class="form-control" name="slcMEstatus">
-							<option value="Activo">Activo</option>
-							<option value="Aspirante">Aspirante</option>
-							<option value="Inactivo">Inactivo</option>
-							<option value="Titulado">Titulado</option>
-						</select>
-				    </div>
-				</div>	
 	      	</form>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        <button type="button" class="btn btn-primary" onclick="validarAlumnoModal()">Guardar</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
-	<div class="modal fade bd-example-modal-sm" id="mdlEditarHabilidad" tabindex="-1" role="dialog" aria-labelledby="mdlEditarHabilidad" aria-hidden="true">
-	  <div class="modal-dialog modal-sm">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h4 class="modal-title">Editar Habilidad</h4>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form>
-	        	<div class="form-group">
-				    <label for="inpMNombreH" class="col-form-label">Nombre*</label>
-				    <div id="divMNombreH">
-				      <input type="text" class="form-control" id="inpMNombreH" placeholder="Nombre" readonly>
-				    </div>
-				</div>
-				<div class="form-group">
-				    <label for="inpMPorcentajeH" class="col-form-label">Porcentaje*</label>
-				    <div id="divMPorcentajeH">
-				      <input type="number" min="0" max="100"  class="form-control" id="inpMPorcentajeH" placeholder="Porcentaje">
-				    </div>
-				</div>
-				<div style="display:none;">
-					<input type="text" id="inpMidCV">
-					<input type="text" id="inpMidHab">
-				</div>
-	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger pull-left" onclick="eliminaCVHabilidad();"><i class="fa fa-trash"></i>Eliminar</button>
-	        <button type="button" class="btn btn-primary" onclick="editaCVHabilidad();">Guardar</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
-	<div class="modal fade bd-example-modal-sm" id="mdlAgregarHabilidad" tabindex="-1" role="dialog" aria-labelledby="mdlAgregarHabilidad" aria-hidden="true">
-	  <div class="modal-dialog modal-sm">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h4 class="modal-title">Agregar Habilidad</h4>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form>
-	        	<div class="form-group">
-				    <label for="inpMANombreH" class="col-form-label">Habilidad*</label>
-				    <div id="divMANombreH">
-				      <select class="form-control" id="slcMAHabilidades"></select>
-				    </div>
-				</div>
-				<div class="form-group">
-				    <label for="inpMAPorcentajeH" class="col-form-label">Porcentaje*</label>
-				    <div id="divMAPorcentajeH">
-				      <input type="number" min="0" max="100"  class="form-control" id="inpMAPorcentajeH" placeholder="Porcentaje" value="0">
-				    </div>
-				</div>
-	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button>
-	        <button type="button" class="btn btn-primary" onclick="validarCVHabilidad();">Guardar</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
-	<div class="modal fade bd-example-modal-sm" id="mdlAgregarIdioma" tabindex="-1" role="dialog" aria-labelledby="mdlAgregarIdioma" aria-hidden="true">
-	  <div class="modal-dialog modal-sm">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h4 class="modal-title">Agregar Idioma</h4>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form>
-	        	<div class="form-group">
-				    <label for="slcMAIdiomas" class="col-form-label">Idioma*</label>
-				    <div id="divMAIdoma">
-				      <select class="form-control" id="slcMAIdiomas"></select>
-				    </div>
-				</div>
-				<div class="form-group">
-				    <label for="inpMAPorcentajeI" class="col-form-label">Porcentaje*</label>
-				    <div id="divMAPorcentajeI">
-				      <input type="number" min="0" max="100"  class="form-control" id="inpMAPorcentajeI" placeholder="Porcentaje" value="0" onclick="this.select();">
-				    </div>
-				</div>
-	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button>
-	        <button type="button" class="btn btn-primary" onclick="validarCVIdioma();">Guardar</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
-	<div class="modal fade bd-example-modal-sm" id="mdlEditarIdioma" tabindex="-1" role="dialog" aria-labelledby="mdlEditarIdioma" aria-hidden="true">
-	  <div class="modal-dialog modal-sm">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h4 class="modal-title">Editar Idioma</h4>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form>
-	        	<div class="form-group">
-				    <label for="inpMEIdioma" class="col-form-label">Idioma*</label>
-				    <div id="divMEIdioma">
-				      <input type="text" class="form-control" id="inpMEIdioma" placeholder="Nombre" readonly>
-				    </div>
-				</div>
-				<div class="form-group">
-				    <label for="inpMEPorcentajeI" class="col-form-label">Porcentaje*</label>
-				    <div id="divMEPorcentajeI">
-				      <input type="number" min="0" max="100"  class="form-control" id="inpMEPorcentajeI" placeholder="Porcentaje">
-				    </div>
-				</div>
-				<div style="display:none;">
-					<input type="text" id="inpMidCVI">
-					<input type="text" id="inpMidIdm">
-				</div>
-	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger pull-left" onclick="eliminaCVIdioma();"><i class="fa fa-trash"></i>Eliminar</button>
-	        <button type="button" class="btn btn-primary" onclick="editaCVIdioma();">Guardar</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
-	<div class="modal fade" id="modalInfoPA" tabindex="-1" role="dialog" aria-labelledby="modalInfoPA" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h3 class="modal-title" id="exampleModalLabel">Perfil Academico</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	<form>
-	      		<div class="form-group row">
-				    <label for="inpMEspec" class="col-sm-3 col-form-label">Especialidad</label>
-				    <div class="col-sm-9" id="divMEspec">
-				      <select class="form-control" value="0" id="slcEspec"></select>	
-				    </div>
-				</div>
-				<div class="form-group row">
-				    <label for="inpMSemestre" class="col-sm-3 col-form-label">Semestre</label>
-				    <div class="col-sm-9" id="divMSemestre">
-				      <input type="number" class="form-control" id="inpMSemestre" placeholder="Semestre">
-				    </div>
-				</div>
-				<div class="form-group row">
-				    <label for="inpMCreditos" class="col-sm-3 col-form-label">Creditos</label>
-				    <div class="col-sm-9" id="divMCreditos">
-				      <input type="checkbox" class="form-control" id="inpMCreditos">
-				    </div>
-				</div>
-				<div class="form-group row">
-				    <label for="inpMSS" class="col-sm-3 col-form-label">Servicio Social</label>
-				    <div class="col-sm-9" id="divMSS">
-				      <input type="checkbox" class="form-control" id="inpMSS">
-				    </div>
-				</div>
-				<div class="form-group row">
-				    <label for="inpMPromedio" class="col-sm-3 col-form-label">Promedio</label>
-				    <div class="col-sm-9">
-				      <input class="form-control" min="0" max="100" type="number" step="0.01" value="0" id="inpMPromedio">
-				    </div>
-				</div>
-				<input style="display: none;" id="inpIdPA">
-	      	</form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        <button type="button" class="btn btn-primary" onclick="editaPA()">Guardar</button>
+	        <button type="button" class="btn btn-primary" onclick="validarEmpresaModal()">Guardar</button>
 	      </div>
 	    </div>
 	  </div>

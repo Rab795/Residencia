@@ -64,7 +64,7 @@ CREATE TABLE AsesorExterno(
 );
 
 ALTER TABLE AsesorExterno ADD CONSTRAINT fk_AsesorExterno_Empresa FOREIGN KEY(ase_IdEmpresa)
-REFERENCES Empresa(emp_id);
+REFERENCES Empresa(emp_id) ON DELETE CASCADE;
 
 CREATE TABLE Proyecto(
 	pro_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -78,13 +78,13 @@ CREATE TABLE Proyecto(
 );
 
 ALTER TABLE Proyecto ADD CONSTRAINT fk_Proyecto_Empresa FOREIGN KEY(pro_idEmpresa)
-REFERENCES Empresa(emp_id);
+REFERENCES Empresa(emp_id) ON DELETE CASCADE;
 
 ALTER TABLE Proyecto ADD CONSTRAINT fk_Proyecto_AsesorExterno FOREIGN KEY(pro_idAsesorExterno)
-REFERENCES AsesorExterno(ase_id);
+REFERENCES AsesorExterno(ase_id) ON DELETE SET NULL;
 
 ALTER TABLE Proyecto ADD CONSTRAINT fk_Proyecto_Periodos FOREIGN KEY(pro_idPeriodo)
-REFERENCES Periodos(prd_id);
+REFERENCES Periodos(prd_id) ON DELETE SET NULL;
 
 CREATE TABLE Alumnos(
 	alu_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -107,16 +107,16 @@ CREATE TABLE Alumnos(
 );
 
 ALTER TABLE Alumnos ADD CONSTRAINT fk_Alumnos_Carreras FOREIGN KEY(alu_idCarrera)
-REFERENCES Carreras(car_id);
+REFERENCES Carreras(car_id) ON DELETE SET NULL;
 
 ALTER TABLE Alumnos ADD CONSTRAINT fk_Alumnos_AsesesorInterno FOREIGN KEY(alu_idAsesorInterno)
-REFERENCES AsesesorInterno(asi_id);
+REFERENCES AsesesorInterno(asi_id) ON DELETE SET NULL;
 
 ALTER TABLE Alumnos ADD CONSTRAINT fk_Alumnos_Proyecto FOREIGN KEY(alu_idProyecto)
-REFERENCES Proyecto(pro_id);
+REFERENCES Proyecto(pro_id) ON DELETE SET NULL;
 
 ALTER TABLE Alumnos ADD CONSTRAINT fk_Alumnos_Periodos FOREIGN KEY(alu_idPeriodo)
-REFERENCES Periodos(prd_id);
+REFERENCES Periodos(prd_id) ON DELETE SET NULL;
 
 CREATE TABLE Convenio(
 	con_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -125,12 +125,11 @@ CREATE TABLE Convenio(
 	con_jornada VARCHAR(100),
 	con_horario VARCHAR(100),
 	con_duracion VARCHAR(100),
-	con_periodo VARCHAR(100),
 	con_idProyecto INT
 );
 
 ALTER TABLE Convenio ADD CONSTRAINT fk_Convenio_Proyecto FOREIGN KEY(con_idProyecto)
-REFERENCES Proyecto(pro_id);
+REFERENCES Proyecto(pro_id) ON DELETE CASCADE;
 
 CREATE TABLE MatrizCompetencias(
 	mco_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
