@@ -31,10 +31,14 @@ var urlAgregarEmpresa = 'php/agregarEmpresa.php';
 var urlEditarEmpresa = 'php/editarEmpresa.php';
 var urlEliminarEmpresa = 'php/eliminarEmpresa.php'; 
 var urlcargaPeriodos = 'php/listaPeriodos.php';
+var urlcargaAsesorEE = 'php/listaAsesoresEmpresa.php';
 var urlcargaProyectos = 'php/paginadoProyectos.php';
 var urlInfoProyecto = 'php/infoProyecto.php';
 var urlInfoConvenio = 'php/infoConvenio.php';
 var urlcargaAlumnosProyecto = 'php/paginadoAlumnosProyecto.php';
+var urlcargaListaEmpresas = 'php/listaEmpresas.php';
+var urlcargaAsesorEE2 = 'php/listaAsesoresEmpresa2.php';
+var urlAgregarProyecto = 'php/agregarProyecto.php';
 
 function iniciarSesion()
 { 
@@ -235,7 +239,6 @@ function guardarAlumno() {
 		}
 	}
 	x.send(parametros);
-
 }
 
 function redireccionarEditar(id){
@@ -1139,6 +1142,40 @@ function cargalistaPeriodos(action){
 	x.send(parametros);
 }
 
+function cargalistaAsesoresEEmpresa(action){
+	document.getElementById("slcAsesorE").innerHTML = "";
+	var idproyecto = getVarsUrl();
+	var parametros = "action="+action+"&idProyecto="+idproyecto.id;
+	var url = urlServidor+urlcargaAsesorEE;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("slcAsesorE").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function cargalistaAsesoresEEmpresa2(action){
+	document.getElementById("slcAsesorE").innerHTML = "";
+	var idEmpresa = document.getElementById("slcEmpresa").value;
+	var parametros = "action="+action+"&idEmpresa="+idEmpresa;
+	var url = urlServidor+urlcargaAsesorEE2;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("slcAsesorE").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
 function cargaProyectos(page){
 	var nombre = document.getElementById("inpNombre").value;
 	var empresa = document.getElementById("inpEmpresa").value;
@@ -1240,4 +1277,101 @@ function cargaAlumnosProyecto(page){
 		}
 	}
 	x.send(parametros);
+}
+
+function infoProyectoModal(){
+	cargalistaPeriodos("lista");
+	cargalistaAsesoresEEmpresa("lista");
+	var idproyecto = getVarsUrl();
+	var parametros = "idProyecto="+idproyecto.id;
+	var url = urlServidor+urlInfoProyecto;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			var datosJSON = JSON.parse(x.responseText);
+			document.getElementById("inpMNombre").value = datosJSON.TITULO;
+			document.getElementById("inpMDesc").value = datosJSON.DESCRIPCION;
+			document.getElementById("inpMDepa").value = datosJSON.DEPARTAMENTO;
+			document.getElementById("inpMEmpresa").value = datosJSON.EMPRESA;
+			document.getElementById("slcAsesorE").value = datosJSON.IDASESORE;		
+			document.getElementById("slcPeriodos").value = datosJSON.IDPERIODO;		
+			document.getElementById("slcMEstatus").value = datosJSON.STATUS; 		
+		}
+	}
+	x.send(parametros);
+}
+
+function cargalistaEmpresas(action){
+	document.getElementById("slcEmpresa").innerHTML = "";
+	var parametros = "action="+action;
+	var url = urlServidor+urlcargaListaEmpresas;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("slcEmpresa").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function validarProyecto(){
+	var correcto =  true;
+	if(document.getElementById("inpTitulo").value == "") { document.getElementById("divTitulo").classList.add("has-error"); correcto = false; }
+	if(document.getElementById("slcEmpresa").value == "") { document.getElementById("divEmpresa").classList.add("has-error"); correcto = false; }
+	if(document.getElementById("slcPeriodos").value == "") { document.getElementById("divPeriodos").classList.add("has-error"); correcto = false; }
+	if (correcto){ guardarProyecto(); }
+	else { toastr.error("Parametros Incompletos"); } 
+}
+
+function guardarProyecto(){
+	var titulo = document.getElementById("inpTitulo").value;
+	var descripcion = document.getElementById("inpDescripcion").value;
+	var departamento = document.getElementById("inpDepartamento").value;
+	var empresa = document.getElementById("slcEmpresa").value;
+	var asesorE = (document.getElementById("slcAsesorE").value != "")? document.getElementById("slcAsesorE").value : 0;
+	var periodo = document.getElementById("slcPeriodos").value;
+	var status = document.getElementById("slcEstatus").value;
+
+	var parametros = "";
+	parametros = conParam("titulo",titulo,parametros);
+	parametros = conParam("descripcion",descripcion,parametros);
+	parametros = conParam("departamento",departamento,parametros);
+	parametros = conParam("empresa",empresa,parametros);
+	parametros = conParam("asesorE",asesorE,parametros);
+	parametros = conParam("periodo",periodo,parametros);
+	parametros = conParam("status",status,parametros);
+
+	var url = urlServidor+urlAgregarProyecto;	
+	x.open('POST',url,true);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			var datosJSON = JSON.parse(x.responseText);
+			
+			if(datosJSON.STATUS == 0)
+			{
+				toastr.success("guardado con exito");
+				setTimeout(redireccionarEditarProyecto, 2000, datosJSON.ID);
+			}
+			if(datosJSON.STATUS == 1)
+			{
+				toastr.error("error al guardar");
+			}
+		}
+	}
+	x.send(parametros);
+}
+
+function redireccionarEditarProyecto(id){
+	location.href ="http://localhost/MED/infoProyecto.html?id="+id;
 }

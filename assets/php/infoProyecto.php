@@ -34,7 +34,8 @@
 				"EMPRESA" : "'.$row['emp_nombre'].'",
 				"IDASESORE" : "'.$row['pro_idAsesorExterno'].'",
 				"ASESORE" : "'.$row['ase_nombre'].'",
-				"PERIODO" : "'.$row['prd_descripcion'].'"
+				"PERIODO" : "'.$row['prd_descripcion'].'",
+				"IDPERIODO" : "'.$row['pro_idPeriodo'].'"
 				}';	
 	}		
 ?>

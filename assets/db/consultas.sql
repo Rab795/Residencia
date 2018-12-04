@@ -182,4 +182,9 @@ UPDATE Alumnos SET
 alu_idProyecto = 1
 WHERE alu_id = 2;
 
+SELECT ase_id,
+    CONCAT(ase_nombre, ' ',ase_aPaterno) As Nombre
+FROM AsesorExterno WHERE ase_IdEmpresa =2;
+
+SELECT pro_idEmpresa FROM Proyecto WHERE pro_id = 1;
 

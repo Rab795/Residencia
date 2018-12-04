@@ -57,7 +57,7 @@
 					<ul class="nav">
 						<li><a href="index.html" class=""><i class="lnr lnr-home"></i> <span>Inicio</span></a></li>
 						<li>
-							<a href="#subPages3" data-toggle="collapse" class="collapse"><i class="lnr lnr-graduation-hat"></i> <span>Alumnos</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<a href="#subPages3" data-toggle="collapse" class="collapsed"><i class="lnr lnr-graduation-hat"></i> <span>Alumnos</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subPages3" class="collapse ">
 								<ul class="nav">
 									<li><a href="alumnos.php" class="">Buscar</a></li>
@@ -66,10 +66,10 @@
 							</div>
 						</li>
 						<li>
-							<a href="#subPages4" data-toggle="collapse" class="active"><i class="lnr lnr-apartment"></i> <span>Empresas</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages4" class="collapse in">
+							<a href="#subPages4" data-toggle="collapse" class="collapsed"><i class="lnr lnr-apartment"></i> <span>Empresas</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages4" class="collapse ">
 								<ul class="nav">
-									<li><a href="empresas.html" class="active">Buscar</a></li>
+									<li><a href="empresas.html" class="">Buscar</a></li>
 									<li><a href="nuevaEmpresa.html" class="">Agregar</a></li>
 								</ul>
 							</div>
@@ -125,13 +125,13 @@
 									<div class="profile-info">
 										<h4 class="heading">Informacion General</h4>
 										<ul class="list-unstyled list-justify">
-											<li>Titulo <span id="spTitulo"></span></li>
-											<li>Descripcion <span id="spDescrip"></span></li>
-											<li>Departamento <span id="spDepa"></span></li>
-											<li>Empresa <span id="spEmpresa"></span></li>
-											<li>Asesor Externo <span id="spAE"></span></li>
-											<li>Periodo <span id="spPeriodo"></span></li>
-											<li>Status <span class="label" id="spStatus"></span></li>
+											<li><strong>Titulo</strong><span id="spTitulo"></span></li>
+											<li><strong>Descripcion</strong><span id="spDescrip"></span></li>
+											<li><strong>Departamento</strong><span id="spDepa"></span></li>
+											<li><strong>Empresa </strong><span id="spEmpresa"></span></li>
+											<li><strong>Asesor Externo </strong><span id="spAE"></span></li>
+											<li><strong>Periodo </strong><span id="spPeriodo"></span></li>
+											<li><strong>Status </strong><span class="label" id="spStatus"></span></li>
 										</ul>
 									</div>
 									<div class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInfoGeneral" onclick="infoProyectoModal()">Editar</button></div>
@@ -202,9 +202,9 @@
 				    </div>
 				</div>
 				<div class="form-group row">
-				    <label for="inpMDesc" class="col-sm-3 col-form-label">Decripcion</label>
+				    <label for="inpMDesc" class="col-sm-3 col-form-label">Descripcion</label>
 				    <div class="col-sm-9" id="divMDesc">
-				      <input type="text" class="form-control" id="inpMDesc" placeholder="Descripcion">
+				      <textarea class="form-control" id="inpMDesc" placeholder="Descripcion"></textarea>
 				    </div>
 				</div>
 				<div class="form-group row">
@@ -214,27 +214,30 @@
 				    </div>
 				</div>
 				<div class="form-group row">
-				    <label for="inpMEmpresa" class="col-sm-3 col-form-label">Empresa</label>
+				    <label for="inpMEmpresa" class="col-sm-3 col-form-label">Empresa *</label>
 				    <div class="col-sm-9" id="divMEmpresa">
-				      <input type="text" class="form-control" id="inpMEmpresa" placeholder="Empresa">
+				      <input type="text" class="form-control" id="inpMEmpresa" placeholder="Empresa" readonly>
 				    </div>
 				</div>
 				<div class="form-group row">
 				    <label for="inpMAE" class="col-sm-3 col-form-label">Asesor Externo</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="inpMAE" placeholder="Asesor Externo">
+				      <select class="form-control" id="slcAsesorE"></select>
 				    </div>
 				</div>
 				<div class="form-group row">
-				    <label for="inpMPeriodo" class="col-sm-3 col-form-label">Periodo</label>
+				    <label for="slcPeriodos" class="col-sm-3 col-form-label">Periodo *</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="inpMPeriodo" placeholder="Periodo">
+				      <select class="form-control" id="slcPeriodos"></select>
 				    </div>
 				</div>
 				<div class="form-group row">
-				    <label for="inpMStatus" class="col-sm-3 col-form-label">Status</label>
+				    <label for="slcMEstatus" class="col-sm-3 col-form-label">Status</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="inpMStatus" placeholder="Status">
+				      	<select id="slcMEstatus" class="form-control" name="slcMEstatus">
+							<option value="Activo">Activo</option>
+							<option value="Cerrado">Cerrado</option>
+						</select>
 				    </div>
 				</div>
 	      	</form>

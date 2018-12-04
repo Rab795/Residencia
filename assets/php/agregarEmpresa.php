@@ -11,7 +11,7 @@
 
 	// REGISTER data into database
     $sql = "INSERT INTO Empresa (emp_nombre,emp_RFC,emp_direccion,emp_ramo,emp_tel)
-			VALUES ('$nombre','$rfc','$direccion','$telefono','$ramo')";
+			VALUES ('$nombre','$rfc','$direccion','$ramo','$telefono')";
     
     $query = mysqli_query($conectado,$sql);
     // if product has been added successfully 
