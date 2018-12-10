@@ -188,3 +188,58 @@ FROM AsesorExterno WHERE ase_IdEmpresa =2;
 
 SELECT pro_idEmpresa FROM Proyecto WHERE pro_id = 1;
 
+SELECT emp_id,emp_nombre FROM Empresa;
+
+INSERT INTO Proyecto
+(pro_nombre,
+pro_descripcion,
+pro_departamento,
+pro_status,
+pro_idEmpresa,
+pro_idAsesorExterno,
+pro_idPeriodo)
+VALUES
+();
+
+INSERT INTO Convenio
+(con_PPIED,
+con_noEstudiantes,
+con_jornada,
+con_horario,
+con_duracion,
+con_idProyecto)
+VALUES
+("",0,"","","",1);
+
+
+UPDATE Proyecto
+SET
+pro_nombre = "",
+pro_descripcion = "",
+pro_departamento = "",
+pro_status = "",
+pro_idAsesorExterno = 1,
+pro_idPeriodo = 1
+WHERE pro_id = 1;
+
+
+UPDATE Convenio SET
+con_noEstudiantes = 0,
+con_jornada = "",
+con_horario = "",
+con_duracion = "",
+con_idProyecto = 1
+WHERE con_id = 1;
+
+DELETE FROM Proyecto WHERE pro_id = 1;
+
+SELECT asi_id,
+    asi_nombre,
+    asi_aPaterno,
+    asi_aMaterno,
+    asi_especialidad,
+    asi_idInstitucion,
+    asi_IdCarrera,
+    car_nombre
+FROM AsesesorInterno INNER JOIN Carreras ON asi_IdCarrera = car_id
+WHERE;

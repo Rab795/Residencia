@@ -138,7 +138,7 @@ CREATE TABLE MatrizCompetencias(
 );
 
 ALTER TABLE MatrizCompetencias ADD CONSTRAINT fk_MatrizCompetencias_Proyecto FOREIGN KEY(mco_idProyecto)
-REFERENCES Proyecto(pro_id);
+REFERENCES Proyecto(pro_id) ON DELETE CASCADE;
 
 CREATE TABLE Especialidades( 
 	esp_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

@@ -74,7 +74,15 @@
 								</ul>
 							</div>
 						</li>
-						<li><a href="#" class=""><i class="lnr lnr-book"></i> <span>Proyectos</span></a></li>
+						<li>
+							<a href="#subPages5" data-toggle="collapse" class="active"><i class="lnr lnr-book"></i> <span>Proyectos</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages5" class="collapse in">
+								<ul class="nav">
+									<li><a href="proyectos.html" class="active">Buscar</a></li>
+									<li><a href="nuevoProyecto.html" class="">Agregar</a></li>
+								</ul>
+							</div>
+						</li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-users"></i> <span>Asesores</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subPages" class="collapse ">
@@ -245,6 +253,52 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 	        <button type="button" class="btn btn-primary" onclick="validarProyectoModal()">Guardar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="modalConvenio" tabindex="-1" role="dialog" aria-labelledby="modalConvenio" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">Convenio</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<form>
+	      		<div class="form-group row">
+				    <label for="inpMNoE" class="col-sm-3 col-form-label">Numero de estudiantes</label>
+				    <div class="col-sm-9">
+				      <input type="number" class="form-control" id="inpMNoE" placeholder="Numero de estudiantes">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMJornada" class="col-sm-3 col-form-label">Jornada</label>
+				    <div class="col-sm-9">
+				      <input type="text" class="form-control" id="inpMJornada" placeholder="Jornada"></input>
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMHorario" class="col-sm-3 col-form-label">Horario</label>
+				    <div class="col-sm-9">
+				      <input type="text" class="form-control" id="inpMHorario" placeholder="Horario">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMDuracion" class="col-sm-3 col-form-label">Duracion</label>
+				    <div class="col-sm-9">
+				      <input type="text" class="form-control" id="inpMDuracion" placeholder="Duracion">
+				    </div>
+				</div>
+				<input type="text" id="inpIdConvenio" style="display: none;">
+	      	</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-primary" onclick="editaConvenio()">Guardar</button>
 	      </div>
 	    </div>
 	  </div>
