@@ -43,6 +43,7 @@ var urlEditarProyecto = 'php/editarProyecto.php';
 var urlEditarConvenio = 'php/editaConvenio.php';
 var urlEliminarProyecto = 'php/eliminarProyecto.php';
 var urlcargaAsesoresI = 'php/paginadoAsesoresI.php';
+var urlAgregarAsesorI = 'php/agregarAsesorInterno.php';
 
 function iniciarSesion()
 { 
@@ -1543,6 +1544,69 @@ function cargaAsesoresI(page){
         if(x.status == 200 && x.readyState == 4)
 		{
 			document.getElementById("respuestaAjax").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function cargalistaCarrerasModal(action){
+	document.getElementById("slcMCarreras").innerHTML = "";
+	var parametros = "action="+action;
+	var url = urlServidor+urlcargaCarreras;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("slcMCarreras").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function validarAsesorInterno() {
+	var correcto =  true;
+	if(document.getElementById("inpMNombre").value == "") { document.getElementById("divMNombre").classList.add("has-error"); correcto = false; }
+	if(document.getElementById("inpMApellidoP").value == "") { document.getElementById("divMApellidoP").classList.add("has-error"); correcto = false; }
+	if (correcto){ guardarAsesorInterno(); }
+	else { toastr.error("Parametros Incompletos"); } 
+}
+
+function guardarAsesorInterno(){
+	var nombre = document.getElementById("inpMNombre").value;
+	var apaterno = document.getElementById("inpMApellidoP").value;
+	var amaterno = document.getElementById("inpMApellidoM").value;
+	var especialidad = document.getElementById("inpMEspecialidad").value;
+	var carrera = (document.getElementById("slcMCarreras").value != "")? document.getElementById("slcMCarreras").value : 0;
+
+	var parametros = "";
+	parametros = conParam("nombre",nombre,parametros);
+	parametros = conParam("apaterno",apaterno,parametros);
+	parametros = conParam("amaterno",amaterno,parametros);
+	parametros = conParam("especialidad",especialidad,parametros);
+	parametros = conParam("carrera",carrera,parametros);
+
+	var url = urlServidor+urlAgregarAsesorI;	
+	x.open('POST',url,true);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			console.log(x.responseText);
+			var datosJSON = JSON.parse(x.responseText);
+			
+			if(datosJSON.STATUS == 0)
+			{
+				toastr.success("guardado con exito");
+				$('#modalNuevoAsesor').modal('hide');
+				cargaAsesoresI(1);
+			}
+			if(datosJSON.STATUS == 1)
+			{
+				toastr.error("error al guardar");
+			}
 		}
 	}
 	x.send(parametros);
