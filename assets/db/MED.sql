@@ -102,6 +102,7 @@ CREATE TABLE Alumnos(
 	alu_edad INT,
 	alu_idCarrera INT,
 	alu_idAsesorInterno INT,
+    alu_idAsesorExterno INT,
 	alu_idProyecto INT,
     alu_idPeriodo INT
 );
@@ -111,6 +112,9 @@ REFERENCES Carreras(car_id) ON DELETE SET NULL;
 
 ALTER TABLE Alumnos ADD CONSTRAINT fk_Alumnos_AsesesorInterno FOREIGN KEY(alu_idAsesorInterno)
 REFERENCES AsesesorInterno(asi_id) ON DELETE SET NULL;
+
+ALTER TABLE Alumnos ADD CONSTRAINT fk_Alumnos_AsesesorExterno FOREIGN KEY(alu_idAsesorExterno)
+REFERENCES AsesorExterno(ase_id) ON DELETE SET NULL;
 
 ALTER TABLE Alumnos ADD CONSTRAINT fk_Alumnos_Proyecto FOREIGN KEY(alu_idProyecto)
 REFERENCES Proyecto(pro_id) ON DELETE SET NULL;

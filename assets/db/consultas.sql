@@ -35,11 +35,24 @@ SELECT alu_id,
     alu_edad,
     alu_idCarrera,
     alu_idAsesorInterno,
+    alu_idAsesorExterno,
     alu_idProyecto,
     alu_idPeriodo,
     car_id,
-    car_nombre
-FROM Alumnos LEFT JOIN Carreras ON alu_idCarrera = car_id WHERE alu_id = 2;
+    car_nombre,
+    pro_nombre,
+    pro_idEmpresa,
+    emp_nombre,
+    asi_nombre,
+    ase_nombre,
+    prd_descripcion
+FROM Alumnos LEFT JOIN Carreras ON alu_idCarrera = car_id
+LEFT JOIN Periodos ON alu_idPeriodo = prd_id
+LEFT JOIN AsesesorInterno ON alu_idAsesorInterno = asi_id
+LEFT JOIN AsesorExterno ON alu_idAsesorExterno = ase_id
+LEFT JOIN Proyecto ON alu_idProyecto = pro_id 
+LEFT JOIN Empresa ON pro_idEmpresa = emp_id
+WHERE alu_id = 1;
 
 SELECT pad_id,
     pad_servicioSocial,
@@ -242,4 +255,4 @@ SELECT asi_id,
     asi_IdCarrera,
     car_nombre
 FROM AsesesorInterno INNER JOIN Carreras ON asi_IdCarrera = car_id
-WHERE;
+WHERE asi_id = 1;

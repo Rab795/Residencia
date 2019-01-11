@@ -26,7 +26,7 @@ INSERT INTO AsesorExterno VALUES (1,"Jose","Martinez","Rodriguez","Gerente",1);
 INSERT INTO Proyecto VALUES (1,"Desarollo de MRP","desc","Sistemas","Activo",1,1,1);
 INSERT INTO Convenio VALUES (1,"",4,"Diurna","8am-5pm","6 meses",1);
 
-INSERT INTO Alumnos VALUES (1,"13211512","Salvador","Rabago","Cruz","Activo","6643678166","src@gmail.com","23355 col cacho","M","1995-04-07","Mexicana",23,1,1,1,1);
+INSERT INTO Alumnos VALUES (1,"13211512","Salvador","Rabago","Cruz","Activo","6643678166","src@gmail.com","23355 col cacho","M","1995-04-07","Mexicana",23,1,1,1,1,1);
 
 INSERT INTO PerfilAcademico VALUES (1,1,0,87.7,11,1,1);
 
