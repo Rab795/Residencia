@@ -1,0 +1,29 @@
+<?php
+	header('Access-Control-Allow-Origin: *');
+
+	require_once("conectar.php");	
+
+	$idAlumno = intval($_POST["idAlumno"]);
+	$idProyecto = intval($_POST["idProyecto"]);
+   
+
+	// REGISTER data into database
+    $sql = "UPDATE Alumnos SET
+			alu_idProyecto = $idProyecto
+			WHERE alu_id = $idAlumno";
+    
+    $query = mysqli_query($conectado,$sql);
+    // if product has been added successfully
+    if ($query) {
+        echo '{
+				"STATUS" : 0,
+				"MENSAJE" : "Asignado con exito"
+				}';
+    } else {
+        echo '{
+				"STATUS" : 1,
+				"MENSAJE" : "No se pudo asignar el registro"
+				}'; echo mysqli_error($conectado);
+				
+    }
+?>			

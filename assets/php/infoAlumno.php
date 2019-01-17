@@ -71,8 +71,8 @@
 				"IDEMPRESA" : '.$IDEMPRESA.',
 				"IDPERIODO" : '.$IDPERIODO.',
 				"CARRERA" : "'.$row['car_nombre'].'",
-				"AE" : "'.$row['asi_nombre'].'",
-				"AI" : "'.$row['ase_nombre'].'",
+				"AE" : "'.$row['ase_nombre'].'",
+				"AI" : "'.$row['asi_nombre'].'",
 				"PROYECTO" : "'.$row['pro_nombre'].'",
 				"EMPRESA" : "'.$row['emp_nombre'].'",
 				"PERIODO" : "'.$row['prd_descripcion'].'"
