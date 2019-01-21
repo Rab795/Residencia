@@ -256,3 +256,46 @@ SELECT asi_id,
     car_nombre
 FROM AsesesorInterno INNER JOIN Carreras ON asi_IdCarrera = car_id
 WHERE asi_id = 1;
+
+SELECT ase_id,
+    ase_nombre,
+    ase_aPaterno,
+    ase_aMaterno,
+    ase_puesto,
+    ase_IdEmpresa
+FROM `MED`.`AsesorExterno`;
+
+SELECT alu_id,
+    alu_noControl,
+    alu_nombre,
+    alu_aPaterno,
+    alu_aMaterno,
+    alu_Status,
+    alu_tel,
+    alu_correo,
+    alu_direccion,
+    alu_genero,
+    alu_fechaNacimeinto,
+    alu_nacionalidad,
+    alu_edad,
+    alu_idCarrera,
+    alu_idAsesorInterno,
+    alu_idAsesorExterno,
+    alu_idProyecto,
+    alu_idPeriodo,
+    car_id,
+    car_nombre,
+    pro_nombre,
+    pro_idEmpresa,
+    emp_nombre,
+    asi_nombre,
+    ase_nombre,
+    prd_descripcion
+FROM Alumnos LEFT JOIN Carreras ON alu_idCarrera = car_id
+LEFT JOIN Periodos ON alu_idPeriodo = prd_id
+LEFT JOIN AsesesorInterno ON alu_idAsesorInterno = asi_id
+LEFT JOIN AsesorExterno ON alu_idAsesorExterno = ase_id
+LEFT JOIN Proyecto ON alu_idProyecto = pro_id 
+LEFT JOIN Empresa ON pro_idEmpresa = emp_id
+WHERE alu_idProyecto IS NOT NULL;
+
