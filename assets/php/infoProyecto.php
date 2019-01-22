@@ -15,11 +15,14 @@
 										pro_status,
 									    pro_idEmpresa,
 									    emp_nombre,
+									    pro_idAsesorInterno,
+										asi_nombre,
 									    pro_idAsesorExterno,
 										ase_nombre,
 									    pro_idPeriodo,
 										prd_descripcion
-									FROM Proyecto LEFT JOIN Periodos ON pro_idPeriodo = prd_id 
+									FROM Proyecto LEFT JOIN Periodos ON pro_idPeriodo = prd_id
+									LEFT JOIN AsesesorInterno ON pro_idAsesorInterno = asi_id  
 									LEFT JOIN AsesorExterno ON pro_idAsesorExterno = ase_id 
 									INNER JOIN Empresa ON pro_idEmpresa = emp_id WHERE pro_id = $idProyecto");
 																			
@@ -32,6 +35,8 @@
 				"STATUS" : "'.$row['pro_status'].'",
 				"IDEMPRESA" : "'.$row['pro_idEmpresa'].'",
 				"EMPRESA" : "'.$row['emp_nombre'].'",
+				"IDASESORI" : "'.$row['pro_idAsesorInterno'].'",
+				"ASESORI" : "'.$row['asi_nombre'].'",
 				"IDASESORE" : "'.$row['pro_idAsesorExterno'].'",
 				"ASESORE" : "'.$row['ase_nombre'].'",
 				"PERIODO" : "'.$row['prd_descripcion'].'",

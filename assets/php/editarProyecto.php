@@ -8,6 +8,7 @@
 	$descripcion = mysqli_real_escape_string($conectado,(strip_tags($_POST["descripcion"],ENT_QUOTES)));
 	$departamento = mysqli_real_escape_string($conectado,(strip_tags($_POST["departamento"],ENT_QUOTES)));
 	$asesorE =  intval($_POST["asesorE"]);
+	$asesorI =  intval($_POST["asesorI"]);
 	$periodo =  intval($_POST["periodo"]);
 	$status = mysqli_real_escape_string($conectado,(strip_tags($_POST["status"],ENT_QUOTES)));
 
@@ -19,6 +20,7 @@
 			pro_descripcion = '$descripcion',
 			pro_departamento = '$departamento',
 			pro_status = '$status',
+			pro_idAsesorInterno = $asesorI,
 			pro_idAsesorExterno = $asesorE,
 			pro_idPeriodo = $periodo
 			WHERE pro_id = $idProyecto";

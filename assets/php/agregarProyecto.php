@@ -8,6 +8,7 @@
 	$departamento = mysqli_real_escape_string($conectado,(strip_tags($_POST["departamento"],ENT_QUOTES)));
 	$empresa = intval($_POST["empresa"]);
 	$asesorE = intval($_POST["asesorE"]);
+	$asesorI = intval($_POST["asesorI"]);
 	$periodo = intval($_POST["periodo"]);
 	$status = mysqli_real_escape_string($conectado,(strip_tags($_POST["status"],ENT_QUOTES)));
 	
@@ -20,9 +21,10 @@
 				pro_departamento,
 				pro_status,
 				pro_idEmpresa,
+				pro_idAsesorInterno,
 				pro_idAsesorExterno,
 				pro_idPeriodo)
-			VALUES ('$titulo','$descripcion','$departamento','$status',$empresa,$asesorE,$periodo)";
+			VALUES ('$titulo','$descripcion','$departamento','$status',$empresa,$asesorI,$asesorE,$periodo)";
     
     $query = mysqli_query($conectado,$sql);
     // if product has been added successfully 

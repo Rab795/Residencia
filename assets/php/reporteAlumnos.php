@@ -80,7 +80,7 @@
 
 	if ($numrows>0){	
 	?>
-		<table class="table table-hover" id="tblAlumnos">
+		<table class="table table-hover" id="tblReporte">
 			<thead>
 				<tr>
 					<th>No. Control</th>

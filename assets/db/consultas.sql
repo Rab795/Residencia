@@ -299,3 +299,83 @@ LEFT JOIN Proyecto ON alu_idProyecto = pro_id
 LEFT JOIN Empresa ON pro_idEmpresa = emp_id
 WHERE alu_idProyecto IS NOT NULL;
 
+SELECT DISTINCT emp_id,
+    emp_nombre,
+    emp_RFC,
+    emp_direccion,
+    emp_ramo,
+    emp_tel
+FROM Empresa LEFT JOIN Proyecto ON pro_idEmpresa = emp_id;
+
+SELECT DISTINCT emp_id,
+    emp_nombre,
+    emp_RFC,
+    emp_direccion,
+    emp_ramo,
+    emp_tel
+FROM Empresa INNER JOIN Proyecto ON pro_idEmpresa = emp_id;
+
+SELECT emp_id,
+    emp_nombre,
+    emp_RFC,
+    emp_direccion,
+    emp_ramo,
+    emp_tel
+FROM Empresa LEFT JOIN Proyecto ON pro_idEmpresa = emp_id  WHERE pro_idEmpresa IS NULL;
+
+SELECT count(*) AS numrows FROM (SELECT DISTINCT emp_id,
+    emp_nombre,
+    emp_RFC,
+    emp_direccion,
+    emp_ramo,
+    emp_tel
+FROM Empresa LEFT JOIN Proyecto ON pro_idEmpresa = emp_id) as d;
+
+SELECT DISTINCT pro_id,
+    pro_nombre,
+    pro_descripcion,
+    pro_departamento,
+	pro_status,
+    pro_idEmpresa,
+    emp_nombre,
+    pro_idAsesorExterno,
+	ase_nombre,
+    pro_idPeriodo,
+	prd_descripcion
+FROM Proyecto LEFT JOIN Periodos ON pro_idPeriodo = prd_id 
+LEFT JOIN AsesorExterno ON pro_idAsesorExterno = ase_id 
+INNER JOIN Empresa ON pro_idEmpresa = emp_id
+LEFT JOIN Alumnos ON alu_idProyecto = pro_id;
+
+SELECT DISTINCT pro_id,
+    pro_nombre,
+    pro_descripcion,
+    pro_departamento,
+	pro_status,
+    pro_idEmpresa,
+    emp_nombre,
+    pro_idAsesorExterno,
+	ase_nombre,
+    pro_idPeriodo,
+	prd_descripcion
+FROM Proyecto LEFT JOIN Periodos ON pro_idPeriodo = prd_id 
+LEFT JOIN AsesorExterno ON pro_idAsesorExterno = ase_id 
+INNER JOIN Empresa ON pro_idEmpresa = emp_id
+INNER JOIN Alumnos ON alu_idProyecto = pro_id;
+
+SELECT pro_id,
+    pro_nombre,
+    pro_descripcion,
+    pro_departamento,
+	pro_status,
+    pro_idEmpresa,
+    emp_nombre,
+    pro_idAsesorExterno,
+	ase_nombre,
+    pro_idPeriodo,
+	prd_descripcion
+FROM Proyecto LEFT JOIN Periodos ON pro_idPeriodo = prd_id 
+LEFT JOIN AsesorExterno ON pro_idAsesorExterno = ase_id 
+INNER JOIN Empresa ON pro_idEmpresa = emp_id
+LEFT JOIN Alumnos ON alu_idProyecto = pro_id WHERE alu_idProyecto IS NULL;
+

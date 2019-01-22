@@ -73,12 +73,16 @@ CREATE TABLE Proyecto(
 	pro_departamento VARCHAR(100),
 	pro_status VARCHAR(50),
 	pro_idEmpresa INT,
+	pro_idAsesorInterno INT,
 	pro_idAsesorExterno INT,
     pro_idPeriodo INT
 );
 
 ALTER TABLE Proyecto ADD CONSTRAINT fk_Proyecto_Empresa FOREIGN KEY(pro_idEmpresa)
 REFERENCES Empresa(emp_id) ON DELETE CASCADE;
+
+ALTER TABLE Proyecto ADD CONSTRAINT fk_Proyecto_AsesorInterno FOREIGN KEY(pro_idAsesorInterno)
+REFERENCES AsesesorInterno(asi_id) ON DELETE SET NULL;
 
 ALTER TABLE Proyecto ADD CONSTRAINT fk_Proyecto_AsesorExterno FOREIGN KEY(pro_idAsesorExterno)
 REFERENCES AsesorExterno(ase_id) ON DELETE SET NULL;
@@ -222,3 +226,46 @@ REFERENCES CurriculumVitae(cv_id) ON DELETE CASCADE;
 
 ALTER TABLE CV_Habilidades ADD CONSTRAINT fk_IdHab FOREIGN KEY(cvh_idHab)
 REFERENCES Habilidades(hab_id);
+
+CREATE TABLE DocumentosAlumno(
+  doc_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  doc_nombre VARCHAR(100) NULL,
+  doc_fase VARCHAR(50) NULL,
+  doc_idAlumno INT NULL
+);
+
+ALTER TABLE DocumentosAlumno ADD CONSTRAINT fk_doc_alumno FOREIGN KEY (doc_idAlumno)
+REFERENCES Alumnos(alu_id) ON DELETE CASCADE;
+
+CREATE TABLE Evaluacion (
+  eva_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  eva_desc VARCHAR(45) NULL,
+  eva_idAlumno INT NULL,
+  eva_idProyecto INT NULL,
+  eva_idEmpresa INT NULL,
+  eva_idAsesorInterno INT NULL,
+  eva_idAsesorExterno INT NULL,
+  eva_idPeriodo INT NULL,
+  eva_nota DECIMAL(18,8) NULL,
+  eva_observaciones VARCHAR(500) NULL,
+  eva_fase VARCHAR(100) NULL,
+  eva_archivo VARCHAR(100) NULL
+);
+
+ALTER TABLE Evaluacion ADD CONSTRAINT fk_eva_alu FOREIGN KEY (eva_idAlumno)
+REFERENCES Alumnos(alu_id) ON DELETE CASCADE;
+
+ALTER TABLE Evaluacion ADD CONSTRAINT fk_eva_pro FOREIGN KEY (eva_idProyecto)
+REFERENCES Proyecto(pro_id) ON DELETE CASCADE;
+
+ALTER TABLE Evaluacion ADD CONSTRAINT fk_eva_emp FOREIGN KEY (eva_idEmpresa)
+REFERENCES Empresa(emp_id) ON DELETE CASCADE;
+
+ALTER TABLE Evaluacion ADD CONSTRAINT fk_eva_ainterno FOREIGN KEY (eva_idAsesorInterno)
+REFERENCES AsesesorInterno(asi_id) ON DELETE CASCADE;
+
+ALTER TABLE Evaluacion ADD CONSTRAINT fk_eva_aexterno FOREIGN KEY (eva_idAsesorExterno)
+REFERENCES AsesorExterno(ase_id) ON DELETE CASCADE;
+
+ALTER TABLE Evaluacion ADD CONSTRAINT fk_ave_periodo FOREIGN KEY (eva_idPeriodo)
+REFERENCES Periodos(prd_id) ON DELETE NO ACTION ON UPDATE NO ACTION;

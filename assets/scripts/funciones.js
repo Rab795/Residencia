@@ -63,6 +63,9 @@ var urlEditarAsesorE =  'php/editarAsesorExterno.php';
 var urlcargaAlumnosSinAsignarAE = 'php/paginadoAlumnosSinAsignarAE.php';
 var urlAsignarAlumnoAE = 'php/asignarAlumnoAE.php';
 var urlcargaReporteAlumnos = 'php/reporteAlumnos.php';
+var urlcargaListaAsesoresInterno = 'php/listaAsesoresInternos.php';
+var urlcargReporteEmpresas =  'php/reporteEmpresas.php';
+var urlcargaReporteProyectos =  'php/reporteProyectos.php';
 
 function iniciarSesion()
 { 
@@ -1317,7 +1320,8 @@ function infoProyecto(){
 			document.getElementById("spDescrip").textContent = datosJSON.DESCRIPCION;
 			document.getElementById("spDepa").textContent = datosJSON.DEPARTAMENTO;
 			document.getElementById("spEmpresa").textContent = datosJSON.EMPRESA;
-			document.getElementById("spAE").textContent = datosJSON.ASESORE;		
+			document.getElementById("spAI").textContent = datosJSON.ASESORI;
+			document.getElementById("spAE").textContent = datosJSON.ASESORE;			
 			document.getElementById("spPeriodo").textContent = datosJSON.PERIODO;		
 			document.getElementById("spStatus").textContent = datosJSON.STATUS;
 			if(datosJSON.STATUS == "Activo"){
@@ -1379,6 +1383,7 @@ function cargaAlumnosProyecto(page){
 function infoProyectoModal(){
 	cargalistaPeriodos("lista");
 	cargalistaAsesoresEEmpresa("lista");
+	cargalistaAsesoresInterno("lista","slcAsesorI");
 	var idproyecto = getVarsUrl();
 	var parametros = "idProyecto="+idproyecto.id;
 	var url = urlServidor+urlInfoProyecto;	
@@ -1394,6 +1399,7 @@ function infoProyectoModal(){
 			document.getElementById("inpMDesc").value = datosJSON.DESCRIPCION;
 			document.getElementById("inpMDepa").value = datosJSON.DEPARTAMENTO;
 			document.getElementById("inpMEmpresa").value = datosJSON.EMPRESA;
+			document.getElementById("slcAsesorI").value = datosJSON.IDASESORI;
 			document.getElementById("slcAsesorE").value = datosJSON.IDASESORE;		
 			document.getElementById("slcPeriodos").value = datosJSON.IDPERIODO;		
 			document.getElementById("slcMEstatus").value = datosJSON.STATUS; 		
@@ -1449,6 +1455,7 @@ function guardarProyecto(){
 	var departamento = document.getElementById("inpDepartamento").value;
 	var empresa = document.getElementById("slcEmpresa").value;
 	var asesorE = (document.getElementById("slcAsesorE").value != "")? document.getElementById("slcAsesorE").value : 0;
+	var asesorI = (document.getElementById("slcAsesorI").value != "")? document.getElementById("slcAsesorI").value : 0;
 	var periodo = document.getElementById("slcPeriodos").value;
 	var status = document.getElementById("slcEstatus").value;
 
@@ -1458,6 +1465,7 @@ function guardarProyecto(){
 	parametros = conParam("departamento",departamento,parametros);
 	parametros = conParam("empresa",empresa,parametros);
 	parametros = conParam("asesorE",asesorE,parametros);
+	parametros = conParam("asesorI",asesorI,parametros);
 	parametros = conParam("periodo",periodo,parametros);
 	parametros = conParam("status",status,parametros);
 
@@ -1503,6 +1511,7 @@ function editaProyecto() {
 	var descripcion = document.getElementById("inpMDesc").value;
 	var departamento = document.getElementById("inpMDepa").value;
 	var asesorE = (document.getElementById("slcAsesorE").value != "")? document.getElementById("slcAsesorE").value : 0;
+	var asesorI = (document.getElementById("slcAsesorI").value != "")? document.getElementById("slcAsesorI").value : 0;
 	var periodo = document.getElementById("slcPeriodos").value;
 	var status = document.getElementById("slcMEstatus").value;
 
@@ -1512,6 +1521,7 @@ function editaProyecto() {
 	parametros = conParam("descripcion",descripcion,parametros);
 	parametros = conParam("departamento",departamento,parametros);
 	parametros = conParam("asesorE",asesorE,parametros);
+	parametros = conParam("asesorI",asesorI,parametros);
 	parametros = conParam("periodo",periodo,parametros);
 	parametros = conParam("status",status,parametros);
 
@@ -2388,7 +2398,7 @@ function exportToExcel(nombre){
 
 	var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
 	var textRange; var j=0;
-	tab = document.getElementById('tblAlumnos'); // id of table
+	tab = document.getElementById('tblReporte'); // id of table
 
 	for(j = 0 ; j < tab.rows.length - 1 ; j++) 
 	{     
@@ -2441,6 +2451,82 @@ function cargaReporteAlumnos(page){
 
 
 	var url = urlServidor+urlcargaReporteAlumnos;	
+	x.open('POST',url,true);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("respuestaAjax").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function cargalistaAsesoresInterno(action,select){
+	document.getElementById(select).innerHTML = "";
+	var parametros = "action="+action;
+	var url = urlServidor+urlcargaListaAsesoresInterno;	
+	x.open('POST',url,false);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById(select).innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function cargaReporteEmpresas(page){
+	var nombre = document.getElementById("inpNombre").value;
+	var rfc = document.getElementById("inpRFC").value;
+	var per_page = document.getElementById("slcRegistros").value;
+	var ramo = document.getElementById("inpRamo").value;
+	var proyecto = document.getElementById("slcProyectos").value;
+	
+	var parametros = "";
+	parametros = conParam("funcion","cargaReporteEmpresas",parametros);
+	parametros = conParam("page",page,parametros);
+	parametros = conParam("per_page",per_page,parametros);
+	parametros = conParam("nombre",nombre,parametros);
+	parametros = conParam("rfc",rfc,parametros);
+	parametros = conParam("ramo",ramo,parametros);
+	parametros = conParam("proyecto",proyecto,parametros);
+	
+	var url = urlServidor+urlcargReporteEmpresas;	
+	x.open('POST',url,true);
+	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	x.onreadystatechange = function() 
+	{
+        if(x.status == 200 && x.readyState == 4)
+		{
+			document.getElementById("respuestaAjax").innerHTML = x.responseText;			
+		}
+	}
+	x.send(parametros);
+}
+
+function cargaReporteProyectos(page){
+	var nombre = document.getElementById("inpNombre").value;
+	var empresa = document.getElementById("inpEmpresa").value;
+	var periodo = document.getElementById("slcPeriodos").value;
+	var status = document.getElementById("slcStatus").value;
+	var per_page = document.getElementById("slcRegistros").value;
+	var alumnos = document.getElementById("slcAlumnos").value;
+
+	var parametros = "";
+	parametros = conParam("funcion","cargaReporteProyectos",parametros);
+	parametros = conParam("page",page,parametros);
+	parametros = conParam("per_page",per_page,parametros);
+	parametros = conParam("nombre",nombre,parametros);
+	parametros = conParam("empresa",empresa,parametros);
+	parametros = conParam("periodo",periodo,parametros);
+	parametros = conParam("status",status,parametros);
+	parametros = conParam("alumnos",alumnos,parametros);
+
+	var url = urlServidor+urlcargaReporteProyectos;	
 	x.open('POST',url,true);
 	x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	x.onreadystatechange = function() 
