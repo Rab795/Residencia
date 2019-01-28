@@ -17,6 +17,7 @@
 	$nacionalidad = mysqli_real_escape_string($conectado,(strip_tags($_POST["nacionalidad"],ENT_QUOTES)));
 	$edad = intval($_POST["edad"]);
 	$carrera = intval($_POST["carrera"]);
+	$periodo = intval($_POST["periodo"]);
 
 	if ($fechaNacimeinto === NULL) {$fechaNacimeinto = 'NULL';}
 	else $fechaNacimeinto = "'$fechaNacimeinto'";
@@ -37,7 +38,8 @@
 			alu_fechaNacimeinto = $fechaNacimeinto,
 			alu_nacionalidad = '$nacionalidad',
 			alu_edad = $edad,
-			alu_idCarrera = $carrera
+			alu_idCarrera = $carrera,
+			alu_idPeriodo = $periodo
 			WHERE alu_id = $id";
     
     $query = mysqli_query($conectado,$sql);

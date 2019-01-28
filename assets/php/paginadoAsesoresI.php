@@ -62,7 +62,7 @@
 							<td><?php echo $row['asi_especialidad']; ?></td>
 							<td><?php echo $row['car_nombre']; ?></td>
 							<td><button class="btn btn-info" onclick="redireccionarEditarAsesorI(<?php echo $row['asi_id']; ?>)"><i class="fa fa-edit"></i></button></td>
-							<td><button class="btn btn-danger" data-toggle="modal" data-target="#mdlConfirm" onclick="idAsesorIEliminar = <?php echo $row['asi_id']; ?>;"><i class="fa fa-trash"></i></button></td>
+							<td><button class="btn btn-danger" data-toggle="modal" data-target="#mdlConfirm" onclick="confirmDialog('Desea eliminar al asesor','eliminarAsesorInterno','<?php echo $row['asi_id']; ?>')"><i class="fa fa-trash"></i></button></td>
 						</tr>
 					<?php
 						$finales++;

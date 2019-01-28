@@ -231,6 +231,17 @@
 									</div>
 								</div>
 								<br>
+								<div class="row">
+									<div class="col-md-3">					
+										<span class="">Periodo</span>
+										<div class="input-group" id="divCarrera">
+											<span class="input-group-addon"><i class="fa fa-laptop-code"></i></span>
+											<select class="form-control" id="slcPeriodos">
+											</select>
+										</div>
+									</div>
+								</div>
+								<br>
 	      						<!-- fin codigo -->
 							</div>
 							<div class="panel-footer">
@@ -267,6 +278,7 @@
 	<script type="text/javascript">
 		if(validarSesion()){
 			cargalistaCarreras("lista");
+			cargalistaPeriodos();
 		}
 	</script>
 </body>

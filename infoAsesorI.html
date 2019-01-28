@@ -244,8 +244,8 @@
 	  </div>
 	</div>
 
-	<!--modal confirm-->
-	<div class="modal fade bd-example-modal-sm" id="mdlConfirm" tabindex="-1" role="dialog" aria-labelledby="mdlConfirm" aria-hidden="true">
+	<!-- Modal Confirm -->
+	<div class="modal fade bd-example-modal-sm" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
 	  <div class="modal-dialog modal-sm">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -255,11 +255,11 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <p>Desea denegar el alumno?</p>
+	        <p id="confirmMessage">Desea eliminar el registro?</p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        <button type="button" class="btn btn-primary" onclick="denegarAlumno();">Aceptar</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="confirmCancel">Cancelar</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmOk">Aceptar</button>
 	      </div>
 	    </div>
 	  </div>

@@ -165,6 +165,7 @@
 											</span></li>
 											<li>Nacionalidad <span id="spNac"></span></li>
 											<li>Status <span id="spStatus"></span></li>
+											<li>Periodo <span id="spPeriodo2"></span></li>
 										</ul>
 									</div>
 									<div class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInfoGeneral" onclick="infoAlumnoModal()">Editar</button></div>
@@ -232,23 +233,12 @@
 										</div>
 									</div>
 									<div class="tab-pane fade" id="tab-bottom-left3">
-										<button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#mdlAgregarDoc"><i class="fa fa-plus-square"></i> Agregar </button>
+										<button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#mdlAgregarDoc" onclick="limpiarinputs(['inpMFase','inpMArchivo'])"><i class="fa fa-plus-square"></i> Agregar </button>
 										<br>
 										<br>
 										<br>
-										<div class="table-responsive">
-											<table class="table project-table">
-												<thead>
-													<tr>
-														<th>Nombre</th>
-														<th>Fase</th>
-														<th>Descargar</th>
-														<th>Eliminar</th>
-													</tr>
-												</thead>
-												<tbody>
-												</tbody>
-											</table>
+										<div class="table-responsive" id="contenidoAjaxDocs">
+											<!-- respuesta ajax -->
 										</div>
 									</div>
 								</div>
@@ -370,6 +360,12 @@
 							<option value="Inactivo">Inactivo</option>
 							<option value="Titulado">Titulado</option>
 						</select>
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMPeriodo" class="col-sm-3 col-form-label">Periodo</label>
+				    <div class="col-sm-9" id="divMPeriodo">
+				      <select class="form-control" id="slcPeriodos"></select>
 				    </div>
 				</div>	
 	      	</form>
@@ -692,25 +688,225 @@
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
-	      <div class="modal-body">
-	        <form>
+	      <form enctype="multipart/form-data" id="formDocs">
+	      <!--<form method="POST" action="http://localhost/MED/assets/php/agregarDocumentoAlumno.php" enctype="multipart/form-data" autocomplete="off">-->
+	      	<div class="modal-body">
 	        	<div class="form-group">
 				    <label for="inpMEIdioma" class="col-form-label">Fase</label>
 				    <div>
-				      <input type="text" class="form-control" id="inpMFase" placeholder="Fase">
+				      <input type="text" class="form-control" name="fase" id="inpMFase" placeholder="Fase">
 				    </div>
 				</div>
 				<div class="form-group">
 				    <label for="inpMEPorcentajeI" class="col-form-label">Archivo*</label>
 				    <div id="divMArchivo">
-				      <input type="file" class="form-control" id="inpMArchivo">
+				      <input type="file" class="form-control" name="archivo" id="inpMArchivo">
 				    </div>
 				</div>
-	        </form>
+				<input type="text"  class="form-control" style="display: none;" name="idAlumno" id="idAlumnoMDoc">
+	      	</div>
+	      	<div class="modal-footer">
+	        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        	<button type="button" onclick="guardarDocumentoAlumno()" class="btn btn-primary">Guardar</button>
+	      	</div>
+		</form>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Modal Confirm -->
+	<div class="modal fade bd-example-modal-sm" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+	  <div class="modal-dialog modal-sm">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title">Confirmar</h3>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <p id="confirmMessage">Desea eliminar el registro?</p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        <button type="button" class="btn btn-primary" onclick="validarArchivoAlumno()">Guardar</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="confirmCancel">Cancelar</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmOk">Aceptar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!--Modal infoProyecto-->
+	<div class="modal fade" id="modalInfoProyecto" tabindex="-1" role="dialog" aria-labelledby="infoProyecto" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">Proyecto</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	 <div class="">
+				<!-- PROFILE HEADER -->
+				<div class="profile-header">
+					<div class="overlay"></div>
+					<div class="profile-main">
+						<img src="assets/img/profileProyecto2.png" class="" alt="Avatar" id="imgProyecto">
+						<h3 class="name" id="txtNombre"></h3>
+					</div>
+				</div>
+				<!-- END PROFILE HEADER -->
+				<!-- PROFILE DETAIL -->
+				<div class="profile-info">
+					<h4 class="heading">Informacion General</h4>
+					<ul class="list-unstyled list-justify">
+						<li><strong>Titulo</strong><span id="spTitulo"></span></li>
+						<li><strong>Descripcion</strong><span id="spDescrip"></span></li>
+						<li><strong>Departamento</strong><span id="spDepa"></span></li>
+						<li><strong>Empresa </strong><span id="spEmpresaProyecto"></span></li>
+						<li><strong>Asesor Externo </strong><span id="spAE"></span></li>
+						<li><strong>Asesor Interno </strong><span id="spAI"></span></li>
+						<li><strong>Periodo </strong><span id="spPeriodoProyecto"></span></li>
+						<li><strong>Status </strong><span class="label" id="spStatusProyecto"></span></li>
+					</ul>
+					<div class="text-center"><a id="linkDetalleProyecto">Detalles...</a></div>
+				</div>
+				<!-- END PROFILE DETAIL -->
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" id="btnDenegarProyectoAlumno" onclick="confirmDialog('Desea denegar el proyecto','denegarXAlumno','Proyecto');"><i class="fas fa-times-circle"></i> Denegar</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div> 
+
+	<!--Modal infoAsesorInterno-->
+	<div class="modal fade" id="modalInfoAsesorInterno" tabindex="-1" role="dialog" aria-labelledby="infoAsesorInterno" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">Asesor Interno</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	 <div class="">
+				<!-- PROFILE HEADER -->
+				<div class="profile-header">
+					<div class="overlay"></div>
+					<div class="profile-main">
+						<img src="assets/img/profileAsesor3.jpg" class="img-circle" alt="Avatar" id="imgStudent">
+						<h3 class="name" id="txtNombre"></h3>
+					</div>
+				</div>
+				<!-- END PROFILE HEADER -->
+				<!-- PROFILE DETAIL -->
+				<div class="profile-info">
+					<h4 class="heading">Informacion General</h4>
+					<ul class="list-unstyled list-justify">
+						<li>Nombre: <span id="spNombrAI"></span></li>
+						<li>Apellido Paterno: <span id="spAPAI"></span></li>
+						<li>Apellido Materno: <span id="spAMAI"></span></li>
+						<li>Especialidad: <span id="spEspecialidadAI"></span></li>
+						<li>Carrera <span id="spCarreraAI"></span></li>
+					</ul>
+					<div class="text-center"><a id="linkDetalleAsesorInterno">Detalles...</a></div>
+				</div>
+				<!-- END PROFILE DETAIL -->
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" onclick="confirmDialog('Desea denegar el Asesor Interno','denegarXAlumno','AsesorInterno');"><i class="fas fa-times-circle"></i> Denegar</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!--Modal infoAsesorExterno-->
+	<div class="modal fade" id="modalInfoAsesorExterno" tabindex="-1" role="dialog" aria-labelledby="infoAsesorExterno" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">Asesor Externo</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	 <div class="">
+				<!-- PROFILE HEADER -->
+				<div class="profile-header">
+					<div class="overlay"></div>
+					<div class="profile-main">
+						<img src="assets/img/profileAsesor3.jpg" class="img-circle" alt="Avatar" id="imgStudent">
+						<h3 class="name" id="txtNombre"></h3>
+					</div>
+				</div>
+				<!-- END PROFILE HEADER -->
+				<!-- PROFILE DETAIL -->
+				<div class="profile-info">
+					<h4 class="heading">Informacion General</h4>
+					<ul class="list-unstyled list-justify">
+						<li>Nombre: <span id="spNombreAE"></span></li>
+						<li>Apellido Paterno: <span id="spAPAE"></span></li>
+						<li>Apellido Materno: <span id="spAMAE"></span></li>
+						<li>Puesto: <span id="spPuestoAE"></span></li>
+						<li>Empresa <span id="spEmpresaAE"></span></li>
+					</ul>
+					<div class="text-center"><a id="linkDetalleAsesorExterno">Detalles...</a></div>
+				</div>
+				<!-- END PROFILE DETAIL -->
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" onclick="confirmDialog('Desea denegar el Asesor Externo','denegarXAlumno','AsesorExterno');"><i class="fas fa-times-circle"></i> Denegar</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!--Modal infoEmpresa-->
+	<div class="modal fade" id="modalInfoEmpresa" tabindex="-1" role="dialog" aria-labelledby="infoEmpresa" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">Empresa</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	 <div class="">
+				<!-- PROFILE HEADER -->
+				<div class="profile-header">
+					<div class="overlay"></div>
+					<div class="profile-main">
+						<img src="assets/img/profileEmpresa2.jpg" class="img-circle" alt="Avatar" id="imgStudent">
+						<h3 class="name" id="txtNombreE"></h3>
+					</div>
+				</div>
+				<!-- END PROFILE HEADER -->
+				<!-- PROFILE DETAIL -->
+				<div class="profile-info">
+					<h4 class="heading">Informacion General</h4>
+					<ul class="list-unstyled list-justify">
+						<li>RFC <span id="spRFCE"></span></li>
+						<li>Direccion <span id="spDireccionE"></span></li>
+						<li>Telefono <span id="spTelE"></span></li>
+						<li>Ramo <span id="spRamoE"></span></li>
+					</ul>
+					<div class="text-center"><a id="linkDetalleEmpresa">Detalles...</a></div>
+				</div>
+				<!-- END PROFILE DETAIL -->
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 	      </div>
 	    </div>
 	  </div>
@@ -732,6 +928,7 @@
 			infoPerfilAcademico();
 			infoCurriculumHabilidades();
 			infoCurriculumIdiomas();
+			cargaDocumentosAlumno(1);
 		}
 	</script>
 </body>

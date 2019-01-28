@@ -168,7 +168,7 @@
 								</div>
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="tab-bottom-left1">
-										<button type="button" class="btn btn-default pull-right"><i class="fa fa-plus-square"></i> Agregar </button>
+										<button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#modalAgregarProyecto" onclick="agregarProyectoModal()"><i class="fa fa-plus-square"></i> Agregar </button>
 										<br>
 										<br>
 										<div class="panel" id="contenidoAjax1"></div>
@@ -250,6 +250,79 @@
 	  </div>
 	</div>
 
+	<!-- Modal agregar Proyecto -->
+	<div class="modal fade" id="modalAgregarProyecto" tabindex="-1" role="dialog" aria-labelledby="agregarProyecto" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">Agregar Proyecto</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<form>
+	      		<div class="form-group row">
+				    <label for="inpMNombre" class="col-sm-3 col-form-label">Titulo *</label>
+				    <div class="col-sm-9" id="divMTitulo">
+				      <input type="text" class="form-control" id="inpTitulo" placeholder="Titulo">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMDesc" class="col-sm-3 col-form-label">Descripcion</label>
+				    <div class="col-sm-9" id="divMDesc">
+				      <textarea class="form-control" id="inpDescripcion" placeholder="Descripcion"></textarea>
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMDepa" class="col-sm-3 col-form-label">Departamento</label>
+				    <div class="col-sm-9" id="divMDepa">
+				      <input type="text" class="form-control" id="inpDepartamento" placeholder="Departamento">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMEmpresa" class="col-sm-3 col-form-label">Empresa *</label>
+				    <div class="col-sm-9" id="divMEmpresa">
+				      <select class="form-control" id="slcEmpresa" placeholder="Empresa" readOnly disabled="true"></select>
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMAE" class="col-sm-3 col-form-label">Asesor Externo</label>
+				    <div class="col-sm-9">
+				      <select class="form-control" id="slcAsesorE"></select>
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="inpMAI" class="col-sm-3 col-form-label">Asesor Interno</label>
+				    <div class="col-sm-9">
+				      <select class="form-control" id="slcAsesorI"></select>
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="slcPeriodos" class="col-sm-3 col-form-label">Periodo *</label>
+				    <div class="col-sm-9" id="divSclPeriodo">
+				      <select class="form-control" id="slcPeriodos"></select>
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label for="slcMEstatus" class="col-sm-3 col-form-label">Status</label>
+				    <div class="col-sm-9">
+				      	<select id="slcEstatus" class="form-control" name="slcEstatus">
+							<option value="Activo">Activo</option>
+							<option value="Cerrado">Cerrado</option>
+						</select>
+				    </div>
+				</div>
+	      	</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-primary pull-right" onclick="validarProyectoEmpresa()" data-dismiss="modal">Guardar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 	<!-- Javascript -->
 	<script src="assets/vendor/jquery/jquery.min.js"></script>
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -265,8 +338,6 @@
 			infoEmpresa();
 			cargaProyectosEmpresa(1);
 			cargaAsesoresExternosEmpresa(1);
-			//infoCurriculumHabilidades();
-			//infoCurriculumIdiomas();
 		}
 	</script>
 </body>

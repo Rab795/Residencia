@@ -5,20 +5,15 @@
 	require_once("conectar.php");										
 	
 	//Parametros
-	$nombre = mysqli_real_escape_string($conectado,(strip_tags($_POST['nombre'], ENT_QUOTES)));
-	$empresa = mysqli_real_escape_string($conectado,(strip_tags($_POST['empresa'])));
-	
-	$campos="ase_id,
-    ase_nombre,
-    ase_aPaterno,
-    ase_aMaterno,
-    ase_puesto,
-    ase_IdEmpresa,
-    emp_nombre";
-	$tables="AsesorExterno INNER JOIN Empresa ON ase_IdEmpresa = emp_id";
-	$sWhere=" (ase_nombre LIKE '%".$nombre."%' OR ase_aPaterno LIKE '%".$nombre."%' OR ase_aMaterno LIKE '%".$nombre."%')";
-	if($empresa != ""){ $sWhere.=" AND ase_IdEmpresa = ".$empresa; }
+	$idAlumno = intval($_POST["idAlumno"]);
 
+	$campos="doc_id,
+    doc_nombre,
+	doc_fase,
+    doc_idAlumno";
+	$tables="DocumentosAlumno";
+	$sWhere=" doc_idAlumno = ".$idAlumno;
+	
 	include 'pagination.php'; //include pagination file
 	//pagination variables
 	$page = (isset($_POST['page']) && !empty($_POST['page']))?$_POST['page']:1;
@@ -37,15 +32,12 @@
 
 	if ($numrows>0){	
 	?>
-		<table class="table table-hover" id="tblAsesoresI">
+		<table class="table table-hover" id="tblDocumentos">
 			<thead>
 				<tr>
 					<th>Nombre</th>
-					<th>A. Paterno</th>
-					<th>A. Materno</th>
-					<th>Puesto</th>
-					<th>Empresa</th>
-					<th>Editar</th>
+					<th>Fase</th>
+					<th>Descargar</th>
 					<th>Eliminar</th>
 				</tr>
 			</thead>
@@ -55,13 +47,10 @@
 					while($row = mysqli_fetch_array($query)){
 					?>
 						<tr>
-							<td><a href="infoAsesorE.html?id=<?php echo $row['ase_id']; ?>"><?php echo $row['ase_nombre']; ?></a></td>
-							<td><?php echo $row['ase_aPaterno']; ?></td>
-							<td><?php echo $row['ase_aMaterno']; ?></td>
-							<td><?php echo $row['ase_puesto']; ?></td>
-							<td><?php echo $row['emp_nombre']; ?></td>
-							<td><button class="btn btn-info" onclick="redireccionarEditarAsesorE(<?php echo $row['ase_id']; ?>)"><i class="fa fa-edit"></i></button></td>
-							<td><button class="btn btn-danger" onclick="confirmDialog('Desea eliminar al asesor','eliminarAsesorExterno','<?php echo $row['ase_id']; ?>')"><i class="fa fa-trash"></i></button></td>
+							<td><?php echo $row['doc_nombre']; ?></td>
+							<td><?php echo $row['doc_fase']; ?></td>
+							<td><button class="btn btn-info" onclick="descargarArchivo('<?php echo $row['doc_nombre']; ?>',<?php echo $row['doc_idAlumno']; ?>)"><i class="fas fa-file-download"></i></button></td>
+							<td><button class="btn btn-danger" onclick="confirmDialog(MENSAJE,'eliminarDocumento','<?php echo $row['doc_id']; ?>');"><i class="fa fa-trash"></i></button></td>
 						</tr>
 					<?php
 						$finales++;
@@ -81,6 +70,4 @@
 		</table>
 	<?php	
 	}
-	
-
 ?>

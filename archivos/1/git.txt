@@ -1,0 +1,4 @@
+git clone ssh://weblogic@10.168.5.70/home/weblogic/git-repos/ccr_gestion.git
+
+-----
+git remote set-url origin ssh://weblogic@10.168.5.148/home/weblogic/git-repos/ccr_gestion.git

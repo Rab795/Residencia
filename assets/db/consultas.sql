@@ -379,3 +379,23 @@ LEFT JOIN AsesorExterno ON pro_idAsesorExterno = ase_id
 INNER JOIN Empresa ON pro_idEmpresa = emp_id
 LEFT JOIN Alumnos ON alu_idProyecto = pro_id WHERE alu_idProyecto IS NULL;
 
+INSERT INTO DocumentosAlumno
+(doc_nombre,
+doc_fase,
+doc_idAlumno)
+VALUES
+('fff.txt',
+'test5',
+1);
+USE MED; 
+SELECT doc_id,
+    doc_nombre,
+	doc_fase,
+    doc_idAlumno
+FROM DocumentosAlumno WHERE doc_idAlumno = 1;
+
+DELETE FROM DocumentosAlumno WHERE doc_id = 1;
+
+SELECT * FROM Periodos;
+SELECT * FROM Alumnos;
+

@@ -1,7 +1,7 @@
 <?php
 
-	//$conectado = @mysql_connect("localhost","root","root");
 	$conectado = new mysqli('127.0.0.1', 'root', 'root');
+	//$conectado = new mysqli('localhost', 'root', 'ziztemaz');
 	if($conectado)
 	{
 		$db ="MED";

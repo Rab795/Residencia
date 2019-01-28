@@ -36,6 +36,7 @@
 					<th>Nombre</th>
 					<th>A. Paterno</th>
 					<th>A. Materno</th>
+					<th>Denegar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,6 +49,7 @@
 							<td><?php echo $row['alu_nombre']; ?></td>
 							<td><?php echo $row['alu_aPaterno']; ?></td>
 							<td><?php echo $row['alu_aMaterno']; ?></td>
+							<td><button class="btn btn-danger" onclick="confirmDialog('Desea denegar al alumno','denegarAlumnoProyecto','<?php echo $row['alu_id']; ?>')"><i class="fa fa-user-slash"></i></button></td>
 						</tr>
 					<?php
 						$finales++;
